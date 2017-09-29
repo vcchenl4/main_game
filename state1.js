@@ -1,4 +1,5 @@
-var mc = {} ,blockB, blockG, blockP, blockY, platforms
+var mc = {} ,blockB, blockG, blockP, blockY, platforms;
+var bottom=1000
 var state1 = {
     preload: function(){
     game.load.image('blockB', 'assets/Neon Block 1 Blue.png');
@@ -31,12 +32,19 @@ var state1 = {
         platforms = game.add.group();
         platforms.enableBody = true;
         
-        var ground = platforms.create(0, 900, 'ground');
+        var ground = platforms.create(0, bottom-5, 'ground');
         
         ground.body.immovable = true;
+        ground.scale.setTo(3,1);
+        
+        
+        
+        
+        mc.anchor.x=.5;
+        mc.anchor.y=.5;
 		addChangeEventListener();
         game.physics.arcade.enable(mc);
-        mc.body.gravity.y=200;
+        mc.body.gravity.y=400;
         mc.body.collideWorldBounds=true;
 		
     },
@@ -53,6 +61,9 @@ var state1 = {
 			mc.scale.setTo(-1,1);
 			mc.animations.play('walk',5,true);
 		}
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && mc.body.touching.down){
+            mc.body.velocity.y=-300;
+        }
 		else{
             mc.body.velocity.x=0;
 			mc.animations.stop();
