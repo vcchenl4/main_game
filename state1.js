@@ -1,4 +1,4 @@
-var mc = {} ,blockB, blockG, blockP, blockY
+var mc = {} ,blockB, blockG, blockP, blockY, platforms
 var state1 = {
     preload: function(){
     game.load.image('blockB', 'assets/Neon Block 1 Blue.png');
@@ -10,12 +10,13 @@ var state1 = {
     game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_1.png', 184,183,7);
     game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_1.png', 184,183,7);
     game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_1.png', 184,183,7);
+    game.load.image('ground','assets/ground.png');    
     
     },
     create: function(){
 		game.stage.backgroundColor = '#777777';
         game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.world.setBounds(0,0,2000,2000);
+		//game.world.setBounds(0,0,1000,1000);
         /*platforms = game.add.group();
         platforms.enableBody = true;
         ground.body.immovable = true;
@@ -24,26 +25,38 @@ var state1 = {
 		blockY = game.add.sprite(800,500,'blockY');
 		blockP = game.add.sprite(500,800,'blockP');
 		blockG = game.add.sprite(800,800,'blockG');
+        
 		mc = game.add.sprite(0,300,'stickY');
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7]);
+        platforms = game.add.group();
+        platforms.enableBody = true;
+        
+        var ground = platforms.create(0, 900, 'ground');
+        
+        ground.body.immovable = true;
 		addChangeEventListener();
+        game.physics.arcade.enable(mc);
+        mc.body.gravity.y=200;
+        mc.body.collideWorldBounds=true;
 		
     },
     update:function(){
+        game.physics.arcade.collide(mc, platforms);
 		if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			mc.x += 3;
+			mc.body.velocity.x=250;
 			mc.scale.setTo(1,1);
 			mc.animations.play('walk',5,true);
             
         }
 		else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-			mc.x -= 3;
+			mc.body.velocity.x=-250;
 			mc.scale.setTo(-1,1);
 			mc.animations.play('walk',5,true);
 		}
 		else{
-			mc.animations.stop()
-			mc.frame = 0
+            mc.body.velocity.x=0;
+			mc.animations.stop();
+			mc.frame = 0;
 		}
     }
     
