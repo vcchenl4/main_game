@@ -1,5 +1,6 @@
 var mc = {} ,blockB, blockG, blockP, blockY, platforms;
-var bottom=1000
+var width = 2000 
+var bottom = 1000
 var state1 = {
     preload: function(){
 		// character preloading
@@ -36,17 +37,20 @@ var state1 = {
         platforms.enableBody = true;
         
         var ground = platforms.create(0, bottom-20, 'ground');
-		var test_wall = platforms.create(700,600,'testwall');
+		var test_wall = platforms.create(700,0,'testwall');
         
         ground.body.immovable = true;
-        ground.scale.setTo(3,1);
+		//for now we have complete ground coverage, we can change this later in the builds
+		// ground width = 368 + height = 21
+        ground.scale.setTo((width /368),1);
 		test_wall.body.immovable = true;
+		test_wall.scale.setTo(1,10);
         
         mc.anchor.x=.5;
         mc.anchor.y=.5;
 		addChangeEventListener();
         game.physics.arcade.enable(mc);
-        mc.body.gravity.y=400;
+        mc.body.gravity.y = 400;
         mc.body.collideWorldBounds=true;
 		
     },
@@ -56,7 +60,7 @@ var state1 = {
 		walltouch()
 	
 		game.input.keyboard.onUpCallback = function(){
-			mc.body.velocity.x=0;
+			mc.body.velocity.x = 0;
 			mc.animations.stop();
 			mc.frame = 0;
 		}
@@ -123,28 +127,32 @@ function moving(keypress){
 	if (keypress.keyCode == Phaser.Keyboard.LEFT){
 		mc.body.velocity.x = -250;
 		mc.scale.setTo(-1,1);
-		mc.animations.play('walk',5,true);
+		mc.animations.play('walk',12,true);
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.RIGHT){
 		mc.body.velocity.x = 250;
 		mc.scale.setTo(1,1);
-		mc.animations.play('walk',5,true);
+		mc.animations.play('walk',12,true);
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.UP){
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -400;	
+			mc.body.velocity.y = -600;	
 		}
 	}
 }
 
 function walltouch(){
 	if (mc.body.touching.down == false){
-		if (mc.body.touching.right == true){
+		if (mc.body.touching.right || mc.body.touching.left){
 			console.log(mc.body.touching.right)
-			mc.body.gravity = 0;
-			mc.body.velocity.y = 100;
+			mc.body.velocity.y = 0;
+			mc.body.gravity.y = 0;
+		}
+		else{
+			mc.body.gravity.y = 400;
 		}
 	}
+	
 }
 
 function addMoveEventListener(){
