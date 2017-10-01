@@ -10,6 +10,7 @@ var state1 = {
 		game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_2.png', 160,180,8);
 	
 		//enviroment preloading
+		game.load.image('bg','assets/background_final.jpg')
 		game.load.image('ground','assets/ground.png');
 		game.load.image('testwall','assets/testwall.png');
 		/*
@@ -21,8 +22,8 @@ var state1 = {
     },
     create: function(){
 		game.stage.backgroundColor = '#777777';
+		//game.add.image(0,0,'bg');
         game.physics.startSystem(Phaser.Physics.ARCADE);
-		
 		//game.world.setBounds(0,0,1000,1000);
 		
 		/*
@@ -31,6 +32,7 @@ var state1 = {
 		blockP = game.add.sprite(500,800,'blockP');
 		blockG = game.add.sprite(800,800,'blockG');*/
         
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		mc = game.add.sprite(0,300,'stickP');
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         platforms = game.add.group();
@@ -47,11 +49,11 @@ var state1 = {
 		test_wall.scale.setTo(1,10);
         
         mc.anchor.x=.5;
-        mc.anchor.y=.5;
+        mc.anchor.y= 1;
 		addChangeEventListener();
         game.physics.arcade.enable(mc);
-        mc.body.gravity.y = 400;
         mc.body.collideWorldBounds=true;
+		mc.body.gravity.y = 5
 		
     },
     update:function(){
@@ -91,6 +93,10 @@ var state1 = {
     }
 }
 
+function addKeyCallback(key,func,args){
+	game.input.keyboard.addKey(key).onDown.add(func,null,null,args);
+}
+
 function colorChange(keyObject){
     var color = "";
     if (keyObject.keyCode==Phaser.Keyboard.ONE) {
@@ -111,10 +117,6 @@ function colorChange(keyObject){
     console.log(color);
 	}
 
-function addKeyCallback(key,func,args){
-	game.input.keyboard.addKey(key).onDown.add(func,null,null,args);
-}
-
 function addChangeEventListener(){
 	addKeyCallback(Phaser.Keyboard.ONE,colorChange,'P');
 	addKeyCallback(Phaser.Keyboard.TWO,colorChange,'Y');
@@ -124,6 +126,7 @@ function addChangeEventListener(){
 
 //need to add in wall jumping in some way
 function moving(keypress){
+	walltouch()
 	if (keypress.keyCode == Phaser.Keyboard.LEFT){
 		mc.body.velocity.x = -250;
 		mc.scale.setTo(-1,1);
@@ -138,15 +141,18 @@ function moving(keypress){
 		if(mc.body.touching.down){
 			mc.body.velocity.y = -600;	
 		}
+		if (walltouch() == true){
+			mc.body.veloctiy.y = -600;
+		}
 	}
 }
 
 function walltouch(){
 	if (mc.body.touching.down == false){
-		if (mc.body.touching.right || mc.body.touching.left){
+		if (mc.body.touching.right == true || mc.body.touching.left == true){
 			console.log(mc.body.touching.right)
-			mc.body.velocity.y = 0;
-			mc.body.gravity.y = 0;
+			mc.body.velocity.y = 20;
+			mc.body.gravity.y = 0
 		}
 		else{
 			mc.body.gravity.y = 400;
