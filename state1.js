@@ -6,20 +6,20 @@ var bottom = 1000
 var state1 = {
     preload: function(){
 		// character preloading
-		game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_2.png', 160,180,8);
-		game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_2.png', 160,180,8);
-		game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_2.png', 160,180,8);
-		game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_2.png', 160,180,8);
+		game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 160,180,8);
+		game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 160,180,8);
+		game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 160,180,8);
+		game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 160,180,8);
 	
 		//enviroment preloading
 		
 		game.load.image('ground','assets/ground.png');
 		game.load.image('testwall','assets/testwall.png');
 		
-		game.load.image('blockB', 'assets/Neon Block 1 Blue.png');
-		game.load.image('blockG', 'assets/Neon Block 1 Green.png');
-		game.load.image('blockP', 'assets/Neon_Block_1_Pink.png');
-		game.load.image('blockY', 'assets/Neon Block 1 Yellow.png');
+		game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
+		game.load.image('blockG', 'assets/Neon Block_3_Green.png');
+		game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
+		game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
     
     },
     create: function(){
