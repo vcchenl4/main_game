@@ -109,10 +109,11 @@ var state2 = {
     },
 //***********************************************************************************************//
     update:function(){
+        
         game.physics.arcade.collide(mc, platforms);
         passthrough();
 		addMoveEventListener();
-		
+		musicrestart();
 		exitState2();
         passthrough();
 	

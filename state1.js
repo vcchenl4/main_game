@@ -34,7 +34,7 @@ var state1 = {
 		music = game.add.audio('bgm');
 
     	music.play('',0,.15,true);
-		//music.loopFull();
+		//music.loopFull(1);
 		
 		exit= game.add.group();
 		blockB= game.add.group();
@@ -111,6 +111,7 @@ var state1 = {
         game.physics.arcade.collide(mc, platforms);
         passthrough();
 		addMoveEventListener();
+        musicrestart();
 		
         passthrough();
 		exitState1();
@@ -247,4 +248,10 @@ function exitState2(){
 function enterState3(){
 	game.state.start('state3');
 	
+}
+
+function musicrestart(){
+    if (music.isPlaying==false){
+        music.restart();
+    }
 }
