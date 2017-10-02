@@ -172,8 +172,15 @@ function moving(keypress){
 		if(mc.body.touching.down){
 			mc.body.velocity.y = -600;	
 		}
-		if (walltouch() == true){
-			mc.body.veloctiy.y = -600;
+		else if(mc.body.touching.right == true){
+			mc.body.velocity.y = -600;
+			mc.body.velocity.x = -300;
+			mc.scale.setTo(-1,1);
+		}
+		else if(mc.body.touching.left == true){
+			mc.body.velocity.y = -600;
+			mc.body.velocity.x = 300;
+			mc.scale.setTo(1,1);			
 		}
 	}
 }
