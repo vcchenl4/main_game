@@ -80,14 +80,14 @@ var state1 = {
 		addChangeEventListener();
         game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 5
+		mc.body.gravity.y = 400
 		
     },
     update:function(){
         game.physics.arcade.collide(mc, platforms);
         passthrough();
 		addMoveEventListener();
-		walltouch();
+		
         passthrough();
 	
 		game.input.keyboard.onUpCallback = function(){
@@ -157,7 +157,7 @@ function addChangeEventListener(){
 
 //need to add in wall jumping in some way
 function moving(keypress){
-	walltouch()
+	
 	if (keypress.keyCode == Phaser.Keyboard.LEFT){
 		mc.body.velocity.x = -250;
 		mc.scale.setTo(-1,1);
@@ -200,19 +200,6 @@ function passthrough(){
     }
 };
 
-function walltouch(){
-	if (mc.body.touching.down == false){
-		if (mc.body.touching.right == true || mc.body.touching.left == true){
-			console.log(mc.body.touching.right)
-			mc.body.velocity.y = -50;
-			mc.body.gravity.y = 0
-		}
-		else{
-			mc.body.gravity.y = 400;
-		}
-	}
-	
-}
 
 function addMoveEventListener(){
 	addKeyCallback(Phaser.Keyboard.LEFT,moving);
