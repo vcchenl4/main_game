@@ -1,6 +1,6 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4,exit,music;
 
-
+//***********************************************************************************************//
 var width = 2000 
 var bottom = 1000
 var state1 = {
@@ -15,44 +15,67 @@ var state1 = {
 		
 		game.load.image('ground','assets/ground.png');
 		game.load.image('testwall','assets/testwall.png');
+		game.load.image('exit','assets/door.png');
 		
 		game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
 		game.load.image('blockG', 'assets/Neon Block_3_Green.png');
 		game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
 		game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
+		
+		game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
     
     },
+//***********************************************************************************************//
     create: function(){
 		game.stage.backgroundColor = '#777777';
 		//game.add.image(0,0,'bg');
         game.physics.startSystem(Phaser.Physics.ARCADE);
 		//game.world.setBounds(0,0,1000,1000);
+		music = game.add.audio('bgm');
+
+    	music.play('',0,.15,true);
+		//music.loopFull();
+		
+		exit= game.add.group();
 		blockB= game.add.group();
         blockY= game.add.group();
         blockG= game.add.group();
         blockP= game.add.group();
+		
+		exit.enableBody=true;
         blockB.enableBody=true;
         blockY.enableBody=true;
         blockG.enableBody=true;
         blockP.enableBody=true;
-        
 		
-		block1 = blockB.create(1000,800,'blockB');
+		exit1 = exit.create(1200,800,'exit');
+        exit1.body.immovable=true;
+        exit1.anchor.x=.5;
+        exit1.anchor.y=.5;
+		
+		//block1 = blockB.create(1000,800,'blockB');
+		block1 = blockB.create(1000,bottom-80,'blockB');
         block1.body.immovable=true;
         block1.anchor.x=.5;
         block1.anchor.y=.5;
         
-		block2 = blockY.create(800,800,'blockY');
+		
+		block1 = blockB.create(1000,bottom-80,'blockB');
+        block1.body.immovable=true;
+        block1.anchor.x=.5;
+        block1.anchor.y=.5;
+        
+		block2 = blockY.create(800,bottom-80,'blockY');
         block2.anchor.x=.5;
         block2.anchor.y=.5
 		block2.body.immovable=true;
         
-        block3 = blockP.create(500,800,'blockP');
+        block3 = blockP.create(500,bottom-80,'blockP');
         block3.anchor.x=.5;
         block3.anchor.y=.5
 		block3.body.immovable=true;
         
-        block4 = blockG.create(275,800,'blockG');
+        block4 = blockG.create(275,bottom-80,'blockG');
         block4.anchor.x=.5;
         block4.anchor.y=.5;
         block4.body.immovable=true;
@@ -64,7 +87,7 @@ var state1 = {
         platforms = game.add.group();
         platforms.enableBody = true;
         
-        var ground = platforms.create(0, bottom-200, 'ground');
+        var ground = platforms.create(0, bottom-20, 'ground');
 		//var test_wall = platforms.create(700,0,'testwall');
         //test_wall.body.immovable = true;
 		//test_wall.scale.setTo(1,10);
@@ -83,12 +106,15 @@ var state1 = {
 		mc.body.gravity.y = 400
 		
     },
+//***********************************************************************************************//
     update:function(){
         game.physics.arcade.collide(mc, platforms);
         passthrough();
 		addMoveEventListener();
 		
         passthrough();
+		exitState1();
+		
 	
 		game.input.keyboard.onUpCallback = function(){
 			mc.body.velocity.x = 0;
@@ -121,7 +147,7 @@ var state1 = {
 		}*/
     }
 }
-
+//***********************************************************************************************//
 function addKeyCallback(key,func,args){
 	game.input.keyboard.addKey(key).onDown.add(func,null,null,args);
 }
@@ -205,4 +231,20 @@ function addMoveEventListener(){
 	addKeyCallback(Phaser.Keyboard.LEFT,moving);
 	addKeyCallback(Phaser.Keyboard.RIGHT,moving);
 	addKeyCallback(Phaser.Keyboard.UP,moving);
+}
+
+function exitState1(){
+	game.physics.arcade.overlap(mc, exit,enterState2 ,null, this);
+}
+function enterState2(){
+	game.state.start('state2');
+}
+
+function exitState2(){
+	game.physics.arcade.overlap(mc, exit,enterState3,null, this);
+	
+}
+function enterState3(){
+	game.state.start('state3');
+	
 }
