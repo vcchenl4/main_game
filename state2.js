@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, ground, wall1, wall2;
 
 
 
@@ -49,17 +49,17 @@ var state2 = {
         block1.anchor.x=.5;
         block1.anchor.y=.5;
         
-		block2 = blockG.create(450,708,'wallG');
+		block2 = blockG.create(450,805,'wallG');
         block2.anchor.x=.5;
         block2.anchor.y=.5
 		block2.body.immovable=true;
         
-        block3 = blockP.create(650,708,'wallP');
+        block3 = blockP.create(650,805,'wallP');
         block3.anchor.x=.5;
         block3.anchor.y=.5
 		block3.body.immovable=true;
         
-        block4 = blockY.create(850,708,'wallY');
+        block4 = blockY.create(850,805,'wallY');
         block4.anchor.x=.5;
         block4.anchor.y=.5;
         block4.body.immovable=true;
@@ -71,15 +71,22 @@ var state2 = {
         platforms = game.add.group();
         platforms.enableBody = true;
         
-        var ground = platforms.create(0, bottom-20, 'ground');
+        ground = platforms.create(0, bottom-20, 'ground');
+		
+        ground.body.immovable = true;
+		
+        wall1=platforms.create(1300,310,'testwall');
+        wall1.body.immovable=true;
+        wall1.scale.setTo(5,1.5);
+        
+        wall2=platforms.create(792,-46,'testwall');
+        wall2.body.immovable=true;
+        wall2.scale.setTo(1.96,1.5);
+        //for now we have complete ground coverage, we can change this later in the builds
 		//var test_wall = platforms.create(700,0,'testwall');
         //test_wall.body.immovable = true;
 		//test_wall.scale.setTo(1,10);
-        
-        
-        ground.body.immovable = true;
-		//for now we have complete ground coverage, we can change this later in the builds
-		// ground width = 368 + height = 21
+        // ground width = 368 + height = 21
         ground.scale.setTo((width /368),1);
 		
         mc.anchor.x=.5;
@@ -177,15 +184,15 @@ function moving(keypress){
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.UP){
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -600;	
+			mc.body.velocity.y = -470;	
 		}
 		else if(mc.body.touching.right == true){
-			mc.body.velocity.y = -600;
+			mc.body.velocity.y = -550;
 			mc.body.velocity.x = -300;
 			mc.scale.setTo(-1,1);
 		}
 		else if(mc.body.touching.left == true){
-			mc.body.velocity.y = -600;
+			mc.body.velocity.y = -550;
 			mc.body.velocity.x = 300;
 			mc.scale.setTo(1,1);			
 		}
