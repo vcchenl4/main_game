@@ -36,6 +36,9 @@ var state2 = {
 		//game.add.image(0,0,'bg');
         game.physics.startSystem(Phaser.Physics.ARCADE);
 		//game.world.setBounds(0,0,1000,1000);
+		keydef()
+
+		
 		exit= game.add.group();
 		blockB= game.add.group();
         blockY= game.add.group();
@@ -116,13 +119,13 @@ var state2 = {
 		musicrestart();
 		exitState2();
         passthrough();
-	
-		game.input.keyboard.onUpCallback = function(){
-			mc.body.velocity.x = 0;
-			mc.animations.stop();
-			mc.frame = 0;
+		
+		if(mc.body.touching.right == true){
+			walltouchR = true;
 		}
-	
+		else if(mc.body.touching.left == true){
+			walltouchL = true;
+		}
 		//changed directional inputs to an event listners
 		//allows more simulatoneous inputs
 		/*

@@ -1,5 +1,5 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4,exit,music;
-
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music;
+var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
 var bottom = 1000
@@ -32,9 +32,10 @@ var state1 = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 		//game.world.setBounds(0,0,1000,1000);
 		music = game.add.audio('bgm');
-
     	music.play('',0,.15,true);
 		//music.loopFull(1);
+		
+		keydef()
 		
 		exit= game.add.group();
 		blockB= game.add.group();
@@ -101,7 +102,7 @@ var state1 = {
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		addChangeEventListener();
-        game.physics.arcade.enable(mc);
+        game.physics.arcade.enable(mc,platforms);
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
 		
@@ -111,41 +112,17 @@ var state1 = {
         game.physics.arcade.collide(mc, platforms);
         passthrough();
 		addMoveEventListener();
-        musicrestart();
 		
+        musicrestart();
         passthrough();
 		exitState1();
 		
-	
-		game.input.keyboard.onUpCallback = function(){
-			mc.body.velocity.x = 0;
-			mc.animations.stop();
-			mc.frame = 0;
+		if(mc.body.touching.right == true){
+			walltouchR = true;
 		}
-	
-		//changed directional inputs to an event listners
-		//allows more simulatoneous inputs
-		/*
-		if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			mc.body.velocity.x=250;
-			mc.scale.setTo(1,1);
-			mc.animations.play('walk',5,true);
-            
-        }
-		else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-			mc.body.velocity.x=-250;
-			mc.scale.setTo(-1,1);
-			mc.animations.play('walk',5,true);
+		else if(mc.body.touching.left == true){
+			walltouchL = true;
 		}
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && mc.body.touching.down){
-            mc.body.velocity.y -= 300;
-        }
-		
-		else{
-            mc.body.velocity.x=0;
-			mc.animations.stop();
-			mc.frame = 0;
-		}*/
     }
 }
 //***********************************************************************************************//
@@ -155,9 +132,9 @@ function addKeyCallback(key,func,args){
 
 function colorChange(keyObject){
     guycolor=""
+	
     if (keyObject.keyCode==Phaser.Keyboard.ONE) {
         guycolor='B';
-        
     }
     else if (keyObject.keyCode==Phaser.Keyboard.TWO) {
         guycolor='G';
@@ -197,17 +174,19 @@ function moving(keypress){
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.UP){
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -600;	
+			mc.body.velocity.y = -470;	
 		}
-		else if(mc.body.touching.right == true){
-			mc.body.velocity.y = -600;
+		else if(walltouchR == true){
+			mc.body.velocity.y = -470;
 			mc.body.velocity.x = -300;
 			mc.scale.setTo(-1,1);
+			walltouchR = false;
 		}
-		else if(mc.body.touching.left == true){
-			mc.body.velocity.y = -600;
+		else if(walltouchL == true){
+			mc.body.velocity.y = -470;
 			mc.body.velocity.x = 300;
-			mc.scale.setTo(1,1);			
+			mc.scale.setTo(1,1);
+			walltouchL = false;
 		}
 	}
 }
@@ -250,8 +229,31 @@ function enterState3(){
 	
 }
 
-function musicrestart(){
-    if (music.isPlaying==false){
-        music.restart();
-    }
+function keydef(){
+	Rkey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+	Lkey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+	Ukey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+	
+	//for wall jumps
+	Lkey.onUp.add(function(){walltouch = false;});
+	Rkey.onUp.add(function(){walltouch = false;});
+	//to properly stop walking animations
+	Lkey.onUp.add(function(){
+		mc.body.velocity.x = 0;
+		mc.animations.stop();
+		mc.frame = 0;
+	});
+	Rkey.onUp.add(function(){
+		mc.body.velocity.x = 0;
+		mc.animations.stop();
+		mc.frame = 0;
+	});
+	
+	
 }
+
+function musicrestart(){
+   /* if (music.isPlaying == false){
+        music.restart();
+    }*/
+};
