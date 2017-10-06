@@ -1,7 +1,7 @@
 var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
-var width = 2000 
+var width = 1200 
 var bottom = 1000
 
 
@@ -182,7 +182,7 @@ function preloadall(){
 	game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
 	game.load.image('blockG', 'assets/Neon Block_3_Green.png');
 	game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
-	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
+	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');	
 		
 	game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
     
@@ -192,6 +192,10 @@ function preloadall(){
     game.load.image('wallP', 'assets/Neon_Wall_3_Pink.png');
 	game.load.image('wallY', 'assets/Neon_Wall_3_Yellow.png');
     game.load.image('wallB', 'assets/Neon_Wall_3_Blue.png');
+    game.load.image('stepG', 'assets/horizNeon_Wall_3_Green.png');
+    game.load.image('stepP', 'assets/horizNeon_Wall_3_Pink.png');
+	game.load.image('stepY', 'assets/horizNeon_Wall_3_Yellow.png');
+    game.load.image('stepB', 'assets/horizNeon_Wall_3_Blue.png');
     
         
 }

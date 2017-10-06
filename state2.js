@@ -1,9 +1,6 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, ground, wall1, wall2;
-
 
 //***********************************************************************************************//
-var width = 2000 
-var bottom = 1000
+
 var state2 = {
     preload: function(){
         preloadall();
@@ -66,6 +63,8 @@ var state2 = {
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
+        
+        game.camera.follow(mc);
 		
     },
 //***********************************************************************************************//
