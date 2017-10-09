@@ -294,11 +294,15 @@ function keydef(){
 		mc.body.velocity.x = 0;
 		mc.animations.stop();
 		mc.frame = 0;
+		walltouchL = false;
+		walltouchR = false;
 	});
 	Rkey.onUp.add(function(){
 		mc.body.velocity.x = 0;
 		mc.animations.stop();
 		mc.frame = 0;
+		walltouchL = false;
+		walltouchR = false;
 	});
 	
 	
