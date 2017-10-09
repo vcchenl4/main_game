@@ -100,7 +100,7 @@ var tutorialstate = {
         var walkrack1=object.create(1900,4,'walkrack');
         walkrack1.scale.setTo(.98,.98);
         
-		mc = game.add.sprite(3023,0,'stickP');
+		mc = game.add.sprite(0,800,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         
