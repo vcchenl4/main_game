@@ -1,9 +1,7 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, turn;
-turn=1;
-var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false,jumpSFX;
-var enemy;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music;
+var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
-var width = 1200 
+var width = 2000 
 var bottom = 1000
 
 
@@ -18,16 +16,13 @@ var state1 = {
     create: function(){
 		
         createrules();
-        music = game.add.audio('bgm');
-        music.play('',0,.15,true);
-		jump = game.add.audio('jumpSFX');
+
         
         mc = game.add.sprite(200,500,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
-		
 		
 		exit1 = exit.create(2000,800,'exit');
         exit1.body.immovable=true;
@@ -65,17 +60,11 @@ var state1 = {
 		// ground width = 368 + height = 21
         ground.scale.setTo((width /368),1);
 		
-        enemy1 = createEnemy(600,500,'enemyP')
-
-		enemy2 = createEnemy(400,500,'enemyB')
-
-		
-		enemy3 = createEnemy(800,500,'enemyG')
+        
 		
         game.physics.arcade.enable(mc,platforms);
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
-		enemy.factor = 1;
         
         
         game.camera.follow(mc);
@@ -95,13 +84,6 @@ var state1 = {
 function updateall(){
     
     game.physics.arcade.collide(mc, platforms);
-	game.physics.arcade.collide(enemy1,platforms);
-	game.physics.arcade.collide(enemy2,platforms);
-	game.physics.arcade.collide(enemy3,platforms);
-	enemyMove(enemy1);
-	//enemyMove(enemy2);
-	//enemyMove(enemy3);
-	
     passthrough();
 	addMoveEventListener();
 	
@@ -118,7 +100,7 @@ function updateall(){
 	}
 }
 
-//***********************************************************************************************//
+
 function addKeyCallback(key,func,args){
 	game.input.keyboard.addKey(key).onDown.add(func,null,null,args);
 }
@@ -167,40 +149,28 @@ function moving(keypress){
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.UP){
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -470;
-			jump.play('',0,6,true);
+			mc.body.velocity.y = -350;	
 		}
 		else if(walltouchR == true){
-			mc.body.velocity.y = -470;
-			mc.body.velocity.x = -300;
+			mc.body.velocity.y = -425;
+			mc.body.velocity.x = -400;
 			mc.scale.setTo(-1,1);
-			jump.play('',0,6,true);
 			walltouchR = false;
 		}
 		else if(walltouchL == true){
-			mc.body.velocity.y = -470;
-			mc.body.velocity.x = 300;
+			mc.body.velocity.y = -425;
+			mc.body.velocity.x = 400;
 			mc.scale.setTo(1,1);
-			jump.play('',0,6,true);
 			walltouchL = false;
 		}
 	}
 }
 
 function preloadall(){
-		
-		//player preloading
-	
     game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 160,180,8);
     game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 160,180,8);
 	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 160,180,8);
 	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 160,180,8);
-	
-		//enemy preloading
-	game.load.spritesheet('enemyB', 'assets/Enemy_Neon_Blue_sprite_3.png', 160,180,8);
-	game.load.spritesheet('enemyG', 'assets/Enemy_Neon_Green_sprite_3.png', 160,180,8);
-	game.load.spritesheet('enemyP', 'assets/Enemy_Neon_Pink_sprite_3.png', 160,180,8);
-	game.load.spritesheet('enemyY', 'assets/Enemy_Neon_Yellow_sprite_3.png', 160,180,8);
 	
 		//enviroment preloading
 		
@@ -212,35 +182,30 @@ function preloadall(){
 	game.load.image('blockG', 'assets/Neon Block_3_Green.png');
 	game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
 	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
-	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');	
 		
 	game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
-
+    
 	
-		//audio preloading
-	
-	game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
-	game.load.audio('jumpSFX',['audio/Jump_SFX1.mp3','audio/Jump_SFX1.ogg','audio/Jump_SFX1.wav']);
     
 	game.load.image('wallG', 'assets/Neon_Wall_3_Green.png');
     game.load.image('wallP', 'assets/Neon_Wall_3_Pink.png');
 	game.load.image('wallY', 'assets/Neon_Wall_3_Yellow.png');
     game.load.image('wallB', 'assets/Neon_Wall_3_Blue.png');
-    game.load.image('stepG', 'assets/horizNeon_Wall_3_Green.png');
-    game.load.image('stepP', 'assets/horizNeon_Wall_3_Pink.png');
-	game.load.image('stepY', 'assets/horizNeon_Wall_3_Yellow.png');
-    game.load.image('stepB', 'assets/horizNeon_Wall_3_Blue.png');
     
-	
+    game.load.image('crate', 'assets/crate.png');
+    game.load.image('largecrate','assets/largecrate.png')
+    
         
 }
-//***********************************************************************************************//
+
 function createrules(){
     game.stage.backgroundColor = '#777777';
 	//game.add.image(0,0,'bg');
     game.physics.startSystem(Phaser.Physics.ARCADE);
 		//game.world.setBounds(0,0,1000,1000);
 	
+	
+		
 		
 	keydef()
 		
@@ -264,10 +229,16 @@ function createrules(){
     addChangeEventListener();
     
     
-    game.world.setBounds(0,0, width*2 , bottom );
+    game.world.setBounds(0,0, width*5 , bottom );
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
+    music = game.add.audio('bgm');
+    music.play('',0,.15,true);
     
-
+		
+		
+        
+    
+    
 }
 
 
@@ -309,6 +280,15 @@ function enterState3(){
 	
 }
 
+function exitTutorialstate(){
+	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
+	
+}
+function enterwinstate(){
+	game.state.start('winstate');
+	
+}
+
 function keydef(){
 	Rkey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	Lkey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
@@ -322,15 +302,11 @@ function keydef(){
 		mc.body.velocity.x = 0;
 		mc.animations.stop();
 		mc.frame = 0;
-		walltouchL = false;
-		walltouchR = false;
 	});
 	Rkey.onUp.add(function(){
 		mc.body.velocity.x = 0;
 		mc.animations.stop();
 		mc.frame = 0;
-		walltouchL = false;
-		walltouchR = false;
 	});
 	
 	
@@ -341,42 +317,3 @@ function musicrestart(){
         music.restart();
    }
 };
-
-function createEnemy(X,Y,color){
-	enemy = game.add.sprite(X,Y,color)
-	game.physics.arcade.enable(enemy,platforms);
-	enemy.anchor.x=.5;
-	enemy.anchor.y=.5;
-	enemy.body.collideWorldBounds=true;
-	enemy.body.gravity.y = 400;
-	return enemy
-	
-}
-
-function enemyMove(enemyNum){
-	//enemyNum.animation.add('right',[1,2,3,4],5,true);
-	//enemyNum.animation.add('left',[5,6,7,8],5,true);
-	//console.log('')
-	enemyNum.body.velocity.x=turn*150;
-	if (enemyNum.body.x >=1000){
-		enemyNum.scale.x=-1;
-		turn=-1;
-		enemyNum.body.velocity.x= turn * 150;
-		console.log('It hit 1000')
-	}
-	else if(enemyNum.body.x <500){
-		enemyNum.scale.x=1
-		turn=1
-		enemyNum.body.velocity.x = turn *150;
-		console.log('test');
-	}
-	/*
-	if (enemyNum.body.velocity.x>0){
-		enemyNum.animations.play('right');
-	}
-	else{
-		enemyNum.animations.play('left');
-	}
-	*/
-	
-}
