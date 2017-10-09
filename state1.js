@@ -211,14 +211,11 @@ function preloadall(){
 	game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
 	game.load.image('blockG', 'assets/Neon Block_3_Green.png');
 	game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
-<<<<<<< HEAD
 	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
-=======
 	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');	
 		
 	game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
-    
->>>>>>> 6bf2fbd655a1eed30d794660d10e9f800ca7faf8
+
 	
 		//audio preloading
 	
