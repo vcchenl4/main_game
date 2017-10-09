@@ -100,7 +100,7 @@ var tutorialstate = {
         var walkrack1=object.create(1900,4,'walkrack');
         walkrack1.scale.setTo(.98,.98);
         
-		mc = game.add.sprite(0,800,'stickP');
+		mc = game.add.sprite(3023,0,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         
@@ -108,9 +108,9 @@ var tutorialstate = {
 		
         ground.body.immovable = true;
 		
-        wall1=platforms.create(3023,465,'testwall');
+        wall1=platforms.create(2975,466,'testwall');
         wall1.body.immovable=true;
-        wall1.scale.setTo(18,.0001);
+        wall1.scale.setTo(18.8,.04);
         
         wall1=blockP.create(3050,119,'wallP');
         wall1.body.immovable=true;
