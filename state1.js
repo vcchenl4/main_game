@@ -84,6 +84,7 @@ var state1 = {
 function updateall(){
     
     game.physics.arcade.collide(mc, platforms);
+    game.physics.arcade.collide(mc, backwall);
     passthrough();
 	addMoveEventListener();
 	
@@ -187,19 +188,38 @@ function preloadall(){
     
 	
     
-	game.load.image('wallG', 'assets/Neon_Wall_3_Green.png');
+    game.load.image('wallG', 'assets/Neon_Wall_3_Green.png');
     game.load.image('wallP', 'assets/Neon_Wall_3_Pink.png');
 	game.load.image('wallY', 'assets/Neon_Wall_3_Yellow.png');
     game.load.image('wallB', 'assets/Neon_Wall_3_Blue.png');
+    game.load.image('stepG', 'assets/horizNeon_Wall_3_Green.png');
+    game.load.image('stepP', 'assets/horizNeon_Wall_3_Pink.png');
+	game.load.image('stepY', 'assets/horizNeon_Wall_3_Yellow.png');
+    game.load.image('stepB', 'assets/horizNeon_Wall_3_Blue.png');
+    
     
     game.load.image('crate', 'assets/crate.png');
     game.load.image('largecrate','assets/largecrate.png')
-    
+    game.load.image('rack', 'assets/block_rack.png')
+    game.load.image('walkrack','assets/walk_rack.png')
+    game.load.image('background','assets/background.png')
         
 }
 
 function createrules(){
     game.stage.backgroundColor = '#777777';
+    var background=game.add.sprite(0,0,'background')
+    background.scale.setTo(2/3,2/3)    
+    var background=game.add.sprite(1732,0,'background')
+    background.scale.setTo(2/3,2/3)    
+    var background=game.add.sprite(1732*2,0,'background')
+    background.scale.setTo(2/3,2/3)
+    var background=game.add.sprite(1732*3,0,'background')
+    background.scale.setTo(2/3,2/3)
+    var background=game.add.sprite(1732*4,0,'background')
+    background.scale.setTo(2/3,2/3)
+    var background=game.add.sprite(1732*5,0,'background')
+    background.scale.setTo(2/3,2/3)
 	//game.add.image(0,0,'bg');
     game.physics.startSystem(Phaser.Physics.ARCADE);
 		//game.world.setBounds(0,0,1000,1000);
@@ -214,7 +234,11 @@ function createrules(){
     blockY= game.add.group();
     blockG= game.add.group();
     blockP= game.add.group();
-		
+    object=game.add.group();
+    backwall=game.add.group();
+    
+    backwall.enableBody=true;
+	object.enableBody=true;	
 	exit.enableBody=true;
     blockB.enableBody=true;
     blockY.enableBody=true;
@@ -314,6 +338,6 @@ function keydef(){
 
 function musicrestart(){
    if (music.isPlaying == false){
-        music.restart();
+        music.play('',0,.15,true);
    }
 };

@@ -10,7 +10,7 @@ var winstate={
     },
     update: function () { 
         if (cursors.up.isDown){
-            game.state.start('state2')
+            game.state.start('tutorialstate')
         }
 
     },

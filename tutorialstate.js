@@ -7,10 +7,10 @@ var tutorialstate = {
     create: function(){
         createrules();
         
-		exit1 = exit.create(4000,800,'exit');
+		exit1 = exit.create(5651,0,'exit');
         exit1.body.immovable=true;
-        exit1.anchor.x=.5;
-        exit1.anchor.y=.5;
+        game.add.text(5713, 100, 'EXIT', { fontSize: '100px', fill: '#000' })
+        
         
 		
 		var crate1 = platforms.create(250,920,'crate');
@@ -58,22 +58,49 @@ var tutorialstate = {
         crate9.anchor.y=.5;
         crate9.body.immovable=true;
         
-        var crateA = platforms.create(2350,860,'largecrate');
+        var crateA = platforms.create(2850,860,'largecrate');
         crateA.anchor.x=.5;
         crateA.anchor.y=.5;
         crateA.body.immovable=true;
         
-        var crateB = platforms.create(2350,613,'largecrate');
+        var crateB = platforms.create(2850,613,'largecrate');
         crateB.anchor.x=.5;
         crateB.anchor.y=.5;
         crateB.body.immovable=true;
         
-        var crateC = platforms.create(2350,362,'largecrate');
-        crateC.scale.setTo(.8,.8);
+        var crateC = platforms.create(2850,237,'largecrate');
+        crateC.anchor.x=.5;
+        crateC.anchor.y-.5;
         crateC.body.immovable=true;
         
+        var blockrack1=platforms.create(2400,260,'rack');
+        blockrack1.scale.setTo(.98,.98);
+        blockrack1.body.immovable=true;
+        
+
+        
+        var wall2=backwall.create(1900,488,'testwall');
+        wall2.scale.setTo(3.5,.0001);
+        wall2.body.immovable=true;
+        var wall2=backwall.create(1900,260,'testwall');
+        wall2.scale.setTo(3.5,.0001);
+        wall2.body.immovable=true;
+        
+        var wall3=backwall.create(2111,488,'testwall');
+        wall3.scale.setTo(.0001,3);
+        wall3.body.immovable=true;
+        
+        var wall4=backwall.create(2111,-190,'testwall');
+        wall4.scale.setTo(.0001,1);
+        wall4.body.immovable=true;
+        var wall4=backwall.create(1900,-190,'testwall');
+        wall4.scale.setTo(.0001,1);
+        wall4.body.immovable=true; 
 		
-		mc = game.add.sprite(1600,0,'stickP');
+        var walkrack1=object.create(1900,4,'walkrack');
+        walkrack1.scale.setTo(.98,.98);
+        
+		mc = game.add.sprite(0,800,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         
@@ -81,9 +108,35 @@ var tutorialstate = {
 		
         ground.body.immovable = true;
 		
-        wall1=platforms.create(1816,-150,'testwall');
+        wall1=platforms.create(3023,465,'testwall');
         wall1.body.immovable=true;
-        wall1.scale.setTo(1,1);
+        wall1.scale.setTo(18,.0001);
+        
+        wall1=blockP.create(3050,119,'wallP');
+        wall1.body.immovable=true;
+        wall1=blockB.create(3360,119,'wallB');
+        wall1.body.immovable=true;
+        wall1=blockG.create(3670,119,'wallG');
+        wall1.body.immovable=true;
+        wall1=blockY.create(3983,119,'wallY');
+        wall1.body.immovable=true;
+        
+        var step1=blockY.create(4250,800,'stepY');
+        step1.body.immovable=true;
+        step1=blockB.create(4600,675,'stepB');
+        step1.body.immovable=true;
+        step1=blockP.create(4950,550,'stepP');
+        step1.body.immovable=true;
+        step1=blockG.create(5300,425,'stepG');
+        step1.body.immovable=true;
+        
+        crate1=platforms.create(4124,920,'crate');
+        crate1.anchor.y=.5
+        crate1.body.immovable=true;
+        
+        wall1=platforms.create(5650,360,'testwall')
+        wall1.scale.setTo(3,3);
+        wall1.body.immovable=true;
         
         //for now we have complete ground coverage, we can change this later in the builds
 		//var test_wall = platforms.create(700,0,'testwall');
