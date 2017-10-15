@@ -4,4 +4,4 @@ game.state.add('state2',state2);
 game.state.add('state3',state3);
 game.state.add('tutorialstate',tutorialstate)
 game.state.add('winstate',winstate)
-game.state.start('tutorialstate');
+game.state.start('state1');

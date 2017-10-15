@@ -79,7 +79,7 @@ var state1 = {
 function updateall(){
     
     game.physics.arcade.collide(mc, platforms);
-    game.physics.arcade.collide(mc, backwall);
+    
     passthrough();
 	addMoveEventListener();
 	
@@ -232,9 +232,9 @@ function createrules(){
     blockG= game.add.group();
     blockP= game.add.group();
     object=game.add.group();
-    backwall=game.add.group();
     
-    backwall.enableBody=true;
+    
+    
 	object.enableBody=true;	
 	exit.enableBody=true;
     blockB.enableBody=true;
@@ -342,8 +342,30 @@ function createCrate(X,Y,crateType){
 	crate.anchor.y=.5;
 }
 
-function createWall(X,Y,name,xScale,yScale){
-	var wall=backwall.create(X,Y,name);
+function createPlatform(X,Y,name,xScale,yScale){
+	var wall=platforms.create(X,Y,name);
 	wall.scale.setTo(xScale,yScale);
 	wall.body.immovable=true;
+}
+
+function createPinkCollide(X,Y,name,xScale,yScale){
+    var thisobject=blockP.create(X,Y,name);
+    thisobject.scale.setTo(xScale,yScale);
+    thisobject.body.immovable=true;
+}
+
+function createBlueCollide(X,Y,name,xScale,yScale){
+    var thisobject=blockB.create(X,Y,name);
+    thisobject.scale.setTo(xScale,yScale);
+    thisobject.body.immovable=true;
+}
+function createYellowCollide(X,Y,name,xScale,yScale){
+    var thisobject=blockY.create(X,Y,name);
+    thisobject.scale.setTo(xScale,yScale);
+    thisobject.body.immovable=true;
+}
+function createGreenCollide(X,Y,name,xScale,yScale){
+    var thisobject=blockG.create(X,Y,name);
+    thisobject.scale.setTo(xScale,yScale);
+    thisobject.body.immovable=true;
 }
