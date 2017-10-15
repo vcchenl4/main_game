@@ -1,4 +1,3 @@
-
 var tutorialstate = {
     preload: function(){
         preloadall();
@@ -7,81 +6,46 @@ var tutorialstate = {
     create: function(){
         createrules();
         
-		exit1 = exit.create(5651,0,'exit');
+		exit1 = exit.create(5651,50,'exit');
         exit1.body.immovable=true;
-        game.add.text(5713, 100, 'EXIT', { fontSize: '100px', fill: '#000' })
+        //game.add.text(5713, 100, 'EXIT', { fontSize: '100px', fill: '#000' })
         
+		//create crates for the tutorial level
+		//createCrate(xPos,yPos,crateType) 
+		var create = createCrate(300,920,'crate');
         
+		var crate2 = createCrate(800,920,'crate');
+        
+        var crate3 = createCrate(1562,673,'crate');
 		
-		var crate1 = platforms.create(250,920,'crate');
-        crate1.body.immovable=true;
-        crate1.anchor.x=.5;
-        crate1.anchor.y=.5;
+		var crate4 = createCrate(800,795,'crate');
         
-		var crate2 = platforms.create(800,920,'crate');
-        crate2.anchor.x=.5;
-        crate2.anchor.y=.5
-		crate2.body.immovable=true;
-        
-        var crate3 = platforms.create(1562,673,'crate');
-        crate3.anchor.x=.5;
-        crate3.anchor.y=.5
-		crate3.body.immovable=true;
-        
-        var crate5 = platforms.create(675,920,'crate');
-        crate5.anchor.x=.5;
-        crate5.anchor.y=.5
-		crate5.body.immovable=true;
-        
-        var crate6 = platforms.create(926,920,'crate');
-        crate6.anchor.x=.5;
-        crate6.anchor.y=.5
-		crate6.body.immovable=true;
-        
-        var crate4 = platforms.create(800,795,'crate');
-        crate4.anchor.x=.5;
-        crate4.anchor.y=.5;
-        crate4.body.immovable=true;
+        var crate5 = createCrate(675,920,'crate');
 
-        var crate7 = platforms.create(1500,860,'largecrate');
-        crate7.anchor.x=.5;
-        crate7.anchor.y=.5;
-        crate7.body.immovable=true;
+        var crate6 = createCrate(926,920,'crate');
+
+        var crate7 = createCrate(1500,860,'largecrate');
+
+        var crate8 = createCrate(1752,860,'largecrate');
+
+        var crate9 = createCrate(1752,613,'largecrate');
+
+        var crateA = createCrate(2850,860,'largecrate');
         
-        var crate8 = platforms.create(1752,860,'largecrate');
-        crate8.anchor.x=.5;
-        crate8.anchor.y=.5;
-        crate8.body.immovable=true;
-        
-        var crate9 = platforms.create(1752,613,'largecrate');
-        crate9.anchor.x=.5;
-        crate9.anchor.y=.5;
-        crate9.body.immovable=true;
-        
-        var crateA = platforms.create(2850,860,'largecrate');
-        crateA.anchor.x=.5;
-        crateA.anchor.y=.5;
-        crateA.body.immovable=true;
-        
-        var crateB = platforms.create(2850,613,'largecrate');
-        crateB.anchor.x=.5;
-        crateB.anchor.y=.5;
-        crateB.body.immovable=true;
+        var crateB = createCrate(2850,613,'largecrate');
         
         var crateC = platforms.create(2850,237,'largecrate');
-        crateC.anchor.x=.5;
-        crateC.anchor.y-.5;
-        crateC.body.immovable=true;
-        
+		
+		/*
         var blockrack1=platforms.create(2400,260,'rack');
         blockrack1.scale.setTo(.98,.98);
         blockrack1.body.immovable=true;
         
-
-        
+		//var wallx = createWall(200,-200,'testwall',3.5,.0001);
         var wall2=backwall.create(1900,488,'testwall');
         wall2.scale.setTo(3.5,.0001);
         wall2.body.immovable=true;
+		
         var wall2=backwall.create(1900,260,'testwall');
         wall2.scale.setTo(3.5,.0001);
         wall2.body.immovable=true;
@@ -99,7 +63,7 @@ var tutorialstate = {
 		
         var walkrack1=object.create(1900,4,'walkrack');
         walkrack1.scale.setTo(.98,.98);
-        
+        */
 		mc = game.add.sprite(0,800,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
@@ -143,6 +107,7 @@ var tutorialstate = {
         //test_wall.body.immovable = true;
 		//test_wall.scale.setTo(1,10);
         // ground width = 368 + height = 21
+		
         ground.scale.setTo((width /368 * 5),1);
 		
         mc.anchor.x=.5;

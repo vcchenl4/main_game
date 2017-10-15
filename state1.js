@@ -4,8 +4,6 @@ var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 var width = 2000 
 var bottom = 1000
 
-
-
 var state1 = {
     preload: function(){
 		// character preloading
@@ -16,15 +14,14 @@ var state1 = {
     create: function(){
 		
         createrules();
-
         
-        mc = game.add.sprite(200,500,'stickP');
+        mc = game.add.sprite(200,800,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		
-		exit1 = exit.create(2000,800,'exit');
+		exit1 = exit.create(2000,850,'exit');
         exit1.body.immovable=true;
         exit1.anchor.x=.5;
         exit1.anchor.y=.5;
@@ -59,9 +56,7 @@ var state1 = {
 		//for now we have complete ground coverage, we can change this later in the builds
 		// ground width = 368 + height = 21
         ground.scale.setTo((width /368),1);
-		
-        
-		
+				
         game.physics.arcade.enable(mc,platforms);
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
@@ -168,6 +163,7 @@ function moving(keypress){
 }
 
 function preloadall(){
+	// load the player sprites
     game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 160,180,8);
     game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 160,180,8);
 	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 160,180,8);
@@ -178,26 +174,27 @@ function preloadall(){
 	game.load.image('ground','assets/ground.png');
 	game.load.image('testwall','assets/testwall.png');
 	game.load.image('exit','assets/door.png');
-		
+	// load the color blocks	
 	game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
 	game.load.image('blockG', 'assets/Neon Block_3_Green.png');
 	game.load.image('blockP', 'assets/Neon_Block_3_Pink.png');
 	game.load.image('blockY', 'assets/Neon Block_3_Yellow.png');
-		
+	// load the background audio
 	game.load.audio('bgm',['audio/Fox_Night2.mp3','audio/Fox_Night2.ogg','audio/Fox_Night2.wav']);
     
 	
-    
+    //load the color walls
     game.load.image('wallG', 'assets/Neon_Wall_3_Green.png');
     game.load.image('wallP', 'assets/Neon_Wall_3_Pink.png');
 	game.load.image('wallY', 'assets/Neon_Wall_3_Yellow.png');
     game.load.image('wallB', 'assets/Neon_Wall_3_Blue.png');
+	//load the color platforms
     game.load.image('stepG', 'assets/horizNeon_Wall_3_Green.png');
     game.load.image('stepP', 'assets/horizNeon_Wall_3_Pink.png');
 	game.load.image('stepY', 'assets/horizNeon_Wall_3_Yellow.png');
     game.load.image('stepB', 'assets/horizNeon_Wall_3_Blue.png');
     
-    
+    //load the types of walls and crates
     game.load.image('crate', 'assets/crate.png');
     game.load.image('largecrate','assets/largecrate.png')
     game.load.image('rack', 'assets/block_rack.png')
@@ -256,11 +253,7 @@ function createrules(){
     game.world.setBounds(0,0, width*5 , bottom );
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
     music = game.add.audio('bgm');
-    music.play('',0,.15,true);
-    
-		
-		
-        
+    music.play('',0,.15,true);        
     
     
 }
@@ -335,9 +328,22 @@ function keydef(){
 	
 	
 }
-
+// loop the bgm music
 function musicrestart(){
    if (music.isPlaying == false){
         music.play('',0,.15,true);
    }
 };
+//creates the crates to use and place
+function createCrate(X,Y,crateType){
+	var crate = platforms.create(X,Y,crateType);
+	crate.body.immovable=true;
+	crate.anchor.x=.5;
+	crate.anchor.y=.5;
+}
+
+function createWall(X,Y,name,xScale,yScale){
+	var wall=backwall.create(X,Y,name);
+	wall.scale.setTo(xScale,yScale);
+	wall.body.immovable=true;
+}
