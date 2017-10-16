@@ -119,39 +119,43 @@ function preloadall(){
     game.load.image('rack', 'assets/block_rack.png')
     game.load.image('walkrack','assets/walk_rack.png')
     game.load.image('background','assets/background.png')
+	game.load.image('sml_rack','assets/small_walk_rack.png')
+    game.load.image('walkrack','assets/walk_rack.png')
+    game.load.image('background','assets/background.png')
+	game.load.image('invis','assets/invis.png')
     
     //enemy preloading
     game.load.spritesheet('enemyB', 'assets/Enemy_Neon_Blue_sprite_3.png', 160,180,8);
     game.load.spritesheet('enemyG', 'assets/Enemy_Neon_Green_sprite_3.png', 160,180,8);
     game.load.spritesheet('enemyP', 'assets/Enemy_Neon_Pink_sprite_3.png', 160,180,8);
-    game.load.spritesheet('enemyY', 'assets/Enemy_Neon_Yellow_sprite_3.png', 160,180,8);
-        
+    game.load.spritesheet('enemyY', 'assets/Enemy_Neon_Yellow_sprite_3.png', 160,180,8);       
 }
 
-function createrules(){
-    game.stage.backgroundColor = '#777777';
-    var background=game.add.sprite(0,0,'background')
-    background.scale.setTo(2/3,2/3)    
-    var background=game.add.sprite(1732,0,'background')
-    background.scale.setTo(2/3,2/3)    
-    var background=game.add.sprite(1732*2,0,'background')
-    background.scale.setTo(2/3,2/3)
-    var background=game.add.sprite(1732*3,0,'background')
-    background.scale.setTo(2/3,2/3)
-    var background=game.add.sprite(1732*4,0,'background')
-    background.scale.setTo(2/3,2/3)
-    var background=game.add.sprite(1732*5,0,'background')
-    background.scale.setTo(2/3,2/3)
-	//game.add.image(0,0,'bg');
+function createrules(lvl_y,y_scale){
+	//this allows for when you want to change the height of the game and redraw the height of the background
+	if (lvl_y === undefined){
+		lvl_y = 0
+	}
+	if(y_scale === undefined){
+		y_scale = 2/3
+	}
+    game.stage.backgroundColor = '561b1b';
+    var background=game.add.sprite(0,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)    
+    var background=game.add.sprite(1732,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)    
+    var background=game.add.sprite(1732*2,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*3,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*4,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*5,lvl_y,'background')
+    background.scale.setTo(2/3,y_scale)
     game.physics.startSystem(Phaser.Physics.ARCADE);
-		//game.world.setBounds(0,0,1000,1000);
     health=100;
     healthtext = game.add.text(16, 16, 'health: 100', { fontSize: '32px', fill: '#fff' });
-    
-	
-	
-		
-		
+   		
 	keydef()
 		
 	exit= game.add.group();
@@ -164,9 +168,7 @@ function createrules(){
     enemyG=game.add.group();
     enemyP=game.add.group();
     object=game.add.group();
-    
-    
-    
+        
 	object.enableBody=true;	
 	exit.enableBody=true;
     blockB.enableBody=true;
@@ -191,19 +193,12 @@ function createrules(){
     music = game.add.audio('bgm');
     
     music.play('',0,.15,true);        
-    jump=game.add.audio('jumpSFX')
-    
-    
-    
-    
+    jump=game.add.audio('jumpSFX')   
 }
+
 function hitEnemy(sprite1, sprite2){
-    
-    
     health-=.1
-    
-    healthtext.text="health: "+Math.round(health)
-    
+    healthtext.text="health: "+Math.round(health)   
 }
 
 function updateall(){
@@ -232,11 +227,6 @@ function updateall(){
 		walltouchL = true;
         
 	}
-    
-
-    enemyMove(enemy1,500,1000);
-    enemyMove(enemy2,200,600);
-    enemyMove(enemy3,400,1200);
     
 }
 
@@ -429,16 +419,16 @@ function createGreenCollide(X,Y,name,xScale,yScale){
 
 function createEnemy(X,Y,color){
     var thisenemy;
-    if (color=='enemyG'){
+    if (color == 'enemyG'){
         thisenemy=enemyG.create(X,Y,color)
     }
-    if (color=='enemyB'){
+    if (color == 'enemyB'){
         thisenemy=enemyB.create(X,Y,color)
     }
-    if (color=='enemyP'){
+    if (color == 'enemyP'){
         thisenemy=enemyP.create(X,Y,color)
     }
-    if (color=='enemyY'){
+    if (color == 'enemyY'){
         thisenemy=enemyY.create(X,Y,color)
     }
     thisenemy.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
@@ -448,15 +438,10 @@ function createEnemy(X,Y,color){
     thisenemy.body.gravity.y = 400;
     thisenemy.turn=1
     return thisenemy
-    
-
-}
+ }
 
 function enemyMove(enemyNum,bound1,bound2){
-    
-    
     if (enemyNum.body.x >=bound2){
-        
         enemyNum.turn=-1
         
         enemyNum.body.velocity.x= enemyNum.turn * 150;

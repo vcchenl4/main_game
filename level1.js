@@ -4,80 +4,62 @@ var level1 = {
     },
 //***********************************************************************************************//
     create: function(){
-        createrules();
-        
-		exit1 = exit.create(5651,50,'exit');
-        exit1.body.immovable=true;
-        //game.add.text(5713, 100, 'EXIT', { fontSize: '100px', fill: '#000' })
-        
-		//create crates for the tutorial level
-		//createCrate(xPos,yPos,crateType) 
-		createCrate(300,920,'crate');
-        
-		createCrate(800,920,'crate');
-        
-        createCrate(1562,673,'crate');
+        createrules(100,5/6);
+		game.world.setBounds(0,0,width * 5, bottom + 300);
 		
-		createCrate(800,795,'crate');
-        
-        createCrate(675,920,'crate');
-
-        createCrate(926,920,'crate');
-
-        createCrate(1500,860,'largecrate');
-
-        createCrate(1752,860,'largecrate');
-
-        createCrate(1752,613,'largecrate');
-        createCrate(2850,860,'largecrate');
-        createCrate(2850,613,'largecrate');
-        createCrate(2850,370,'largecrate');
+		//creates the enemies
+		E1 = createEnemy(644,1100,'enemyG');
+		E2 = createEnemy(2467,240,'enemyY');
+		
+		//create racks --> platforms --> crates
+		//1st 2 racks
+        createPlatform(0,(bottom + 260) - 955 * .6,'rack',0.6,0.6);
+		var hold = object.create(500,(bottom + 260) - 955 * .6,'sml_rack');
+		hold.scale.setTo(0.75,0.6);
+		createPlatform(500,(bottom + 260) - 955 * .6, 'invis',215 * .75, (955-320) * .6);
+		
+		//2nd group of racks
+		hold = object.create(1050,(bottom + 260) - 955 * .6,'sml_rack');
+		hold.scale.setTo(0.75,0.6);
+		createPlatform(1050,(bottom + 260) - 955 * .6, 'invis',215 * .75,(955-320) * .6);
+		
+		hold = object.create(1050 + 215 * 0.75,(bottom + 260) - 955 * .6,'sml_rack');
+		hold.scale.setTo(0.75,0.6);
+		createPlatform(1050 + 215 * 0.75,(bottom + 260) - 955 * .6, 'invis',215 * .75,(955-320) * .6);
+		
+		//boxes
+		createCrate(1955,(bottom + 260) - 100,'largecrate');
+		createCrate(2017,(bottom + 260) - 287,'crate');
+		createCrate(2205,(bottom + 260) - 100,'largecrate');
+		createCrate(2205,(bottom + 260) - 350,'largecrate');
+		
+		//3rd group of racks
+		createPlatform(2335,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		createPlatform(2335 + 215 * .75,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		createPlatform(2335 + 215 * 2 * .75,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		createPlatform(2335 + 215 * 3 * .75,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		createPlatform(2335 + 215 * 4 * .75,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		createPlatform(2335 + 215 * 5 * .75,(bottom + 260) - 955 * .6,'rack',0.75,0.6);
+		
+		//guard platform + guard
+		createCrate(2460 + 215 * 5 * .75 ,(bottom + 260) - 635,'crate')
+		createPlatform(2275 + 215 * .75, 420,'testwall',10,.1)
+		createBlueCollide(3300,300,'stepB',1,1);
+		createYellowCollide(3900,300,'stepY',1,1);
+		
+		//last platform + door
+		createPlatform(3600,(bottom + 260) - 955 * .75,'rack',0.75,0.75);
+		createPlatform(4246,300,'testwall',15,.25);
+		exit.create(4650,20,'exit');
 		
 		
-        createPlatform(2400,260,'rack',.98,.98)
-
-        createPlatform(1900,488,'testwall',3.5,.0001)
-		//var wallx = createWall(200,-200,'testwall',3.5,.0001);
-        createPlatform(1900,260,'testwall',3.5,.0001)
-        
-        createPlatform(2111,488,'testwall',.0001,3)
-        
-        createPlatform(2111,-190,'testwall',.0001,1)
-        
-        createPlatform(1900,-190,'testwall',.0001,1)
-        
-        var walkrack1=object.create(1900,4,'walkrack');
-        walkrack1.scale.setTo(.98,.98);
-        
 		
-        
 
-		createPlatform(2975,466,'testwall',18.8,.04)
+		//creates the ground
+        createPlatform(0,bottom + 280,'ground',1000,1);
         
-        createPinkCollide(3050,119,'wallP',1,1)
-        createBlueCollide(3360,119,'wallB',1,1)
-        createGreenCollide(3670,119,'wallG',1,1)
-        createYellowCollide(3983,119,'wallY',1,1)
-        
-        createPinkCollide(4950,550,'stepP',1,1)
-        createBlueCollide(4600,675,'stepB',1,1)
-        createGreenCollide(5300,425,'stepG',1,1)
-        createYellowCollide(4250,800,'stepY',1,1)
-
-        createCrate(4124,920,'crate')
-
-        createPlatform(5650,360,'testwall',3,3)
-        
-        //for now we have complete ground coverage, we can change this later in the builds
-		//var test_wall = platforms.create(700,0,'testwall');
-        //test_wall.body.immovable = true;
-		//test_wall.scale.setTo(1,10);
-        // ground width = 368 + height = 21
-		
-        createPlatform(0,bottom-20,'ground',1000,1)
-        
-		mc = game.add.sprite(0,800,'stickP');
-        guycolor='P';
+		mc = game.add.sprite(0,(bottom + 280) - 955 * .6  - 150,'stickB');
+        guycolor='B';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
@@ -92,31 +74,9 @@ var level1 = {
         updateall();
         exitTutorialstate();
         musicrestart();
+		enemyMove(E1,670,1450);
+		enemyMove(E2,2467,2967);
         
-		
-		//changed directional inputs to an event listners
-		//allows more simulatoneous inputs
-		/*
-		if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			mc.body.velocity.x=250;
-			mc.scale.setTo(1,1);
-			mc.animations.play('walk',5,true);
-            
-        }
-		else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-			mc.body.velocity.x=-250;
-			mc.scale.setTo(-1,1);
-			mc.animations.play('walk',5,true);
-		}
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && mc.body.touching.down){
-            mc.body.velocity.y -= 300;
-        }
-		
-		else{
-            mc.body.velocity.x=0;
-			mc.animations.stop();
-			mc.frame = 0;
-		}*/
     }
 }
 
