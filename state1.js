@@ -283,14 +283,14 @@ function moving(keypress){
 			mc.body.velocity.y = -350;	
 		}
 		else if(walltouchR == true){
-			mc.body.velocity.y = -425;
-			mc.body.velocity.x = -400;
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = -200;
 			mc.scale.setTo(-1,1);
 			walltouchR = false;
 		}
 		else if(walltouchL == true){
-			mc.body.velocity.y = -425;
-			mc.body.velocity.x = 400;
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = 200;
 			mc.scale.setTo(1,1);
 			walltouchL = false;
 		}
