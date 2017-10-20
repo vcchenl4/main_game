@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, health, healthtext;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, health, healthtext,radarG,radarB,radarY,radarP,ground;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
@@ -51,15 +51,7 @@ var state1 = {
         enemy2 = createEnemy(400,500,'enemyB')
         enemy3 = createEnemy(800,500,'enemyG')
         
-        var ground = platforms.create(0, bottom-20, 'ground');
-		//var test_wall = platforms.create(700,0,'testwall');
-        //test_wall.body.immovable = true;
-		//test_wall.scale.setTo(1,10);
         
-        ground.body.immovable = true;
-		//for now we have complete ground coverage, we can change this later in the builds
-		// ground width = 368 + height = 21
-        ground.scale.setTo((width /368),1);
 				
         game.physics.arcade.enable(mc,platforms);
         mc.body.collideWorldBounds=true;
@@ -113,6 +105,11 @@ function preloadall(){
 	game.load.image('stepY', 'assets/horizNeon_Wall_3_Yellow.png');
     game.load.image('stepB', 'assets/horizNeon_Wall_3_Blue.png');
     
+    game.load.image('radarG','assets/Neon_Green_Radar.png')
+    game.load.image('radarB','assets/Neon_Blue_Radar.png')
+    game.load.image('radarY','assets/Neon_Yellow_Radar.png')
+    game.load.image('radarP','assets/Neon_Pink_Radar.png')
+    
     //load the types of walls and crates
     game.load.image('crate', 'assets/crate.png');
     game.load.image('largecrate','assets/largecrate.png')
@@ -154,8 +151,8 @@ function createrules(lvl_y,y_scale){
     background.scale.setTo(2/3,y_scale)
     game.physics.startSystem(Phaser.Physics.ARCADE);
     health=100;
-    healthtext = game.add.text(16, 16, 'health: 100', { fontSize: '32px', fill: '#fff' });
-   		
+    healthtext = game.add.text(16, 16, 'Health: 100%', { fontSize: '32px', fill: '#fff' });
+    healthtext.fixedToCamera=true;
 	keydef()
 		
 	exit= game.add.group();
@@ -167,10 +164,18 @@ function createrules(lvl_y,y_scale){
     enemyY=game.add.group();
     enemyG=game.add.group();
     enemyP=game.add.group();
+    radarB=game.add.group();
+    radarY=game.add.group();
+    radarP=game.add.group();
+    radarG=game.add.group();
     object=game.add.group();
         
 	object.enableBody=true;	
 	exit.enableBody=true;
+    radarB.enableBody=true;
+    radarY.enableBody=true;
+    radarG.enableBody=true;
+    radarP.enableBody=true;
     blockB.enableBody=true;
     blockY.enableBody=true;
     blockG.enableBody=true;
@@ -184,7 +189,6 @@ function createrules(lvl_y,y_scale){
 		
     platforms = game.add.group();
     platforms.enableBody = true;
-    
     addChangeEventListener();
     
     
@@ -196,9 +200,9 @@ function createrules(lvl_y,y_scale){
     jump=game.add.audio('jumpSFX')   
 }
 
-function hitEnemy(sprite1, sprite2){
-    health-=.1
-    healthtext.text="health: "+Math.round(health)   
+function hitEnemy(mc, enemy){
+    health-=.5
+    healthtext.text="Health: "+Math.round(health)+"%"   
 }
 
 function updateall(){
@@ -208,7 +212,7 @@ function updateall(){
     game.physics.arcade.collide(enemyG, platforms);
     game.physics.arcade.collide(enemyB, platforms);
     game.physics.arcade.collide(enemyY, platforms);
-    
+
     
 	addMoveEventListener();
 	
@@ -304,7 +308,7 @@ function moving(keypress){
 function passthrough(){
     if (guycolor!="P"){
         game.physics.arcade.collide(mc, blockP);
-        game.physics.arcade.collide(mc, enemyP),hitEnemy;
+        game.physics.arcade.collide(mc, enemyP,hitEnemy);
         
     }
     if (guycolor!="G"){
@@ -393,6 +397,7 @@ function createPlatform(X,Y,name,xScale,yScale){
 	var wall=platforms.create(X,Y,name);
 	wall.scale.setTo(xScale,yScale);
 	wall.body.immovable=true;
+    return wall
 }
 
 function createPinkCollide(X,Y,name,xScale,yScale){
@@ -421,15 +426,23 @@ function createEnemy(X,Y,color){
     var thisenemy;
     if (color == 'enemyG'){
         thisenemy=enemyG.create(X,Y,color)
+        thisenemy.radar=radarG.create(X,Y,"radarG")
+        thisenemy.color="G"
     }
     if (color == 'enemyB'){
         thisenemy=enemyB.create(X,Y,color)
+        thisenemy.radar=radarB.create(X,Y,"radarB")
+        thisenemy.color="B"
     }
     if (color == 'enemyP'){
         thisenemy=enemyP.create(X,Y,color)
+        thisenemy.radar=radarP.create(X,Y,"radarP")
+        thisenemy.color="P"
     }
     if (color == 'enemyY'){
         thisenemy=enemyY.create(X,Y,color)
+        thisenemy.radar=radarY.create(X,Y,"radarY")
+        thisenemy.color="Y"
     }
     thisenemy.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
     thisenemy.anchor.x=.5;
@@ -437,27 +450,60 @@ function createEnemy(X,Y,color){
     thisenemy.body.collideWorldBounds=true;
     thisenemy.body.gravity.y = 400;
     thisenemy.turn=1
+    
     return thisenemy
  }
 
 function enemyMove(enemyNum,bound1,bound2){
+    if ((enemyNum.body.position.x-mc.body.position.x)>0){
+        if (enemyNum.turn==-1 && (enemyNum.body.position.x-mc.body.position.x)<300){
+            if (enemyNum.color!=guycolor){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-140) ){
+                    inRange();
+                }
+            }
+        }
+    }
+    else if ((enemyNum.body.position.x-mc.body.position.x)<0){
+        if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<300){
+            if (enemyNum.color!=guycolor){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-140) ){
+                    inRange();
+                }
+            }
+        }
+    }
     if (enemyNum.body.x >=bound2){
         enemyNum.turn=-1
-        
+        enemyNum.radar.scale.setTo(enemyNum.turn,1)
         enemyNum.body.velocity.x= enemyNum.turn * 150;
+        enemyNum.radar.body.velocity.x=enemyNum.turn*150
+        enemyNum.radar.body.x=enemyNum.body.x+40
+        enemyNum.radar.body.y=enemyNum.body.y-70
         
     }
     else if(enemyNum.body.x <=bound1){
         
         enemyNum.turn=1;
         enemyNum.body.velocity.x = enemyNum.turn *150;
+        enemyNum.radar.body.velocity.x=enemyNum.turn*150
         enemyNum.scale.setTo(1,1)
+        enemyNum.radar.scale.setTo(enemyNum.turn,1)
+        enemyNum.radar.body.x=enemyNum.body.x+120
+        enemyNum.radar.body.y=enemyNum.body.y-70
         
     }
     else{
         
         enemyNum.body.velocity.x=150*enemyNum.turn
+        enemyNum.radar.body.velocity.x=enemyNum.turn*150
         enemyNum.scale.setTo(enemyNum.turn,1)
+        enemyNum.radar.scale.setTo(enemyNum.turn,1)
         enemyNum.animations.play('walk',12,true)
     }
+}
+
+function inRange(){
+    health-=.1
+    healthtext.text="Health: "+Math.round(health)+"%"  
 }
