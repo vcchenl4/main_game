@@ -1,6 +1,8 @@
 var cursors;
 var diedstate={
-    preload: function(){},
+    preload: function(){
+        preloadall();
+    },
     create: function(){
         game.stage.backgroundColor = '#777777';
         game.add.text(340, 200, 'YOU Died!', { fontSize: '100px', fill: '#000' })
@@ -11,9 +13,9 @@ var diedstate={
     update: function () { 
         if (cursors.up.isDown){
             health=100
-            game.state.start('state1')
+            game.state.start('level1')
+            music.restart()
         }
 
-    },
-    update: function(){}
+    }
 }

@@ -226,7 +226,7 @@ function createrules(lvl_y,y_scale){
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
     music = game.add.audio('bgm');
     
-    music.play('',0,.15,true);        
+    music.play('',0,1,true);        
     jump=game.add.audio('jumpSFX')   
 }
 
@@ -387,11 +387,15 @@ function enterState3(){
 }
 
 function exitTutorialstate(){
-	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
+	game.physics.arcade.overlap(mc, exit,enterLevel1,null, this);
 	
 }
 function enterwinstate(){
 	game.state.start('winstate');
+	
+}
+function enterLevel1(){
+	game.state.start('level1');
 	
 }
 
@@ -420,7 +424,7 @@ function keydef(){
 // loop the bgm music
 function musicrestart(){
    if (music.context.currentTime>loop*18){
-       music.play('',0,.15,true);       
+       music.restart()      
        loop+=1
        
    }
