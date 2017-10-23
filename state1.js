@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, health, healthtext,radarG,radarB,radarY,radarP,ground,loop=1;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
@@ -150,9 +150,39 @@ function createrules(lvl_y,y_scale){
     var background=game.add.sprite(1732*5,lvl_y,'background')
     background.scale.setTo(2/3,y_scale)
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    health=100;
-    healthtext = game.add.text(16, 16, 'Health: 100%', { fontSize: '32px', fill: '#fff' });
-    healthtext.fixedToCamera=true;
+    Stealth=100;
+    Stealthtext = game.add.text(16, 20, 'Stealth: 100%', { fontSize: '32px', fill: '#fff' });
+    Stealthtext.fixedToCamera=true;
+    
+    headtext = game.add.text(340, 20, 'Control Keys:    1=', { fontSize: '32px', fill: '#fff' });
+    headtext.fixedToCamera=true;
+    headdude=game.add.sprite(570,8,'stickB');
+    headdude.scale.setTo(.35,.35);
+    headdude.fixedToCamera=true;
+    
+    headtext = game.add.text(640, 20, '2=', { fontSize: '32px', fill: '#fff' });
+    headtext.fixedToCamera=true;
+    headdude=game.add.sprite(670,8,'stickG');
+    headdude.scale.setTo(.35,.35);
+    headdude.fixedToCamera=true;
+    
+    
+    headtext = game.add.text(740, 20, '3=', { fontSize: '32px', fill: '#fff' });
+    headtext.fixedToCamera=true;
+    headdude=game.add.sprite(770,8,'stickP');
+    headdude.scale.setTo(.35,.35);
+    headdude.fixedToCamera=true;
+    
+    
+    
+    headtext = game.add.text(840, 20, '4=', { fontSize: '32px', fill: '#fff' });
+    headtext.fixedToCamera=true;
+    headdude=game.add.sprite(870,8,'stickY');
+    headdude.scale.setTo(.35,.35);
+    headdude.fixedToCamera=true;
+    
+    
+    
 	keydef()
 		
 	exit= game.add.group();
@@ -201,8 +231,8 @@ function createrules(lvl_y,y_scale){
 }
 
 function hitEnemy(mc, enemy){
-    health-=.5
-    healthtext.text="Health: "+Math.round(health)+"%"   
+    Stealth-=.5
+    Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
 }
 
 function updateall(){
@@ -222,7 +252,7 @@ function updateall(){
 	
     
     passthrough();
-    if (health<=0){
+    if (Stealth<=0){
         game.state.start('diedstate')
     }
 	
@@ -337,6 +367,7 @@ function addMoveEventListener(){
 	addKeyCallback(Phaser.Keyboard.LEFT,moving);
 	addKeyCallback(Phaser.Keyboard.RIGHT,moving);
 	addKeyCallback(Phaser.Keyboard.UP,moving);
+    
 }
 
 function exitState1(){
@@ -515,6 +546,6 @@ function enemyMove(enemyNum,bound1,bound2){
 }
 
 function inRange(){
-    health-=.1
-    healthtext.text="Health: "+Math.round(health)+"%"  
+    Stealth-=.1
+    Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
 }
