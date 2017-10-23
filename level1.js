@@ -50,6 +50,8 @@ var level1 = {
 		//last platform + door
 		createPlatform(3600,(bottom + 260) - 955 * .75,'rack',0.75,0.75);
 		createPlatform(4246,300,'testwall',15,.25);
+        createPlatform(3770,500,'testwall',10,20);
+        createPlatform(4246,300,'testwall',5,10);
 		exit.create(4650,20,'exit');
 		
 		
