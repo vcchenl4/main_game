@@ -56,7 +56,9 @@ var level1 = {
 		
 
 		//creates the ground
-        createPlatform(0,bottom + 280,'ground',1000,1);
+        ground=createPlatform(0,bottom + 280,'ground',1000,1);
+        
+        
         
 		mc = game.add.sprite(0,(bottom + 280) - 955 * .6  - 150,'stickB');
         guycolor='B';
@@ -74,7 +76,7 @@ var level1 = {
         updateall();
         exitTutorialstate();
         musicrestart();
-		enemyMove(E1,670,1450);
+		enemyMove(E1,300,1450);
 		enemyMove(E2,2467,2967);
         
     }

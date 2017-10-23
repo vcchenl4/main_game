@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, health, healthtext,radarG,radarB,radarY,radarP,ground;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, health, healthtext,radarG,radarB,radarY,radarP,ground,loop=1;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
@@ -212,6 +212,10 @@ function updateall(){
     game.physics.arcade.collide(enemyG, platforms);
     game.physics.arcade.collide(enemyB, platforms);
     game.physics.arcade.collide(enemyY, platforms);
+    game.physics.arcade.collide(enemyY, [blockG,blockP,blockB]);
+    game.physics.arcade.collide(enemyG, [blockY,blockP,blockB]);
+    game.physics.arcade.collide(enemyB, [blockG,blockP,blockY]);
+    game.physics.arcade.collide(enemyP, [blockG,blockY,blockB]);
 
     
 	addMoveEventListener();
@@ -282,21 +286,24 @@ function moving(keypress){
 		mc.animations.play('walk',12,true);
 		}
 	else if(keypress.keyCode == Phaser.Keyboard.UP){
-        jump.play('',0,6,true)
+        
 		if(mc.body.touching.down){
 			mc.body.velocity.y = -350;	
+            jump.play('',0,6,true);
 		}
 		else if(walltouchR == true){
 			mc.body.velocity.y = -350;
 			mc.body.velocity.x = -200;
 			mc.scale.setTo(-1,1);
 			walltouchR = false;
+            jump.play('',0,6,true);
 		}
 		else if(walltouchL == true){
 			mc.body.velocity.y = -350;
 			mc.body.velocity.x = 200;
 			mc.scale.setTo(1,1);
 			walltouchL = false;
+            jump.play('',0,6,true);
 		}
 	}
 }
@@ -381,8 +388,10 @@ function keydef(){
 }
 // loop the bgm music
 function musicrestart(){
-   if (music.isPlaying == false){
-        music.play('',0,.15,true);
+   if (music.context.currentTime>loop*18){
+       music.play('',0,.15,true);       
+       loop+=1
+       
    }
 };
 //creates the crates to use and place
@@ -426,22 +435,22 @@ function createEnemy(X,Y,color){
     var thisenemy;
     if (color == 'enemyG'){
         thisenemy=enemyG.create(X,Y,color)
-        thisenemy.radar=radarG.create(X,Y,"radarG")
+        thisenemy.radar=radarG.create(X+40,Y-70,"radarG")
         thisenemy.color="G"
     }
     if (color == 'enemyB'){
         thisenemy=enemyB.create(X,Y,color)
-        thisenemy.radar=radarB.create(X,Y,"radarB")
+        thisenemy.radar=radarB.create(X+40,Y-70,"radarB")
         thisenemy.color="B"
     }
     if (color == 'enemyP'){
         thisenemy=enemyP.create(X,Y,color)
-        thisenemy.radar=radarP.create(X,Y,"radarP")
+        thisenemy.radar=radarP.create(X+40,Y-70,"radarP")
         thisenemy.color="P"
     }
     if (color == 'enemyY'){
         thisenemy=enemyY.create(X,Y,color)
-        thisenemy.radar=radarY.create(X,Y,"radarY")
+        thisenemy.radar=radarY.create(X+40,Y-70,"radarY")
         thisenemy.color="Y"
     }
     thisenemy.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
@@ -456,18 +465,18 @@ function createEnemy(X,Y,color){
 
 function enemyMove(enemyNum,bound1,bound2){
     if ((enemyNum.body.position.x-mc.body.position.x)>0){
-        if (enemyNum.turn==-1 && (enemyNum.body.position.x-mc.body.position.x)<300){
+        if (enemyNum.turn==-1 && (enemyNum.body.position.x-mc.body.position.x)<250){
             if (enemyNum.color!=guycolor){
-                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-140) ){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
                     inRange();
                 }
             }
         }
     }
     else if ((enemyNum.body.position.x-mc.body.position.x)<0){
-        if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<300){
+        if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<250){
             if (enemyNum.color!=guycolor){
-                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-140) ){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
                     inRange();
                 }
             }
@@ -494,9 +503,11 @@ function enemyMove(enemyNum,bound1,bound2){
         
     }
     else{
+        enemyNum.radar.body.velocity.x=enemyNum.turn*150
+        
+        
         
         enemyNum.body.velocity.x=150*enemyNum.turn
-        enemyNum.radar.body.velocity.x=enemyNum.turn*150
         enemyNum.scale.setTo(enemyNum.turn,1)
         enemyNum.radar.scale.setTo(enemyNum.turn,1)
         enemyNum.animations.play('walk',12,true)
