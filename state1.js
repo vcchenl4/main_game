@@ -226,7 +226,7 @@ function createrules(lvl_y,y_scale){
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
     music = game.add.audio('bgm');
     
-    music.play('',0,1,true);        
+       
     jump=game.add.audio('jumpSFX')   
 }
 
@@ -424,6 +424,7 @@ function keydef(){
 // loop the bgm music
 function musicrestart(){
    if (music.context.currentTime>loop*18){
+       music.stop()
        music.restart()      
        loop+=1
        

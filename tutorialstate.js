@@ -85,6 +85,8 @@ var tutorialstate = {
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
         game.camera.follow(mc)
+        
+        music.play('',0,1,true);     
 		
     },
 //***********************************************************************************************//
