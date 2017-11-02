@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
@@ -136,6 +136,7 @@ function createrules(lvl_y,y_scale){
 	if(y_scale === undefined){
 		y_scale = 2/3
 	}
+    cursors = game.input.keyboard.createCursorKeys();
     game.stage.backgroundColor = '561b1b';
     var background=game.add.sprite(0,lvl_y,'background')
     background.scale.setTo(2/3,y_scale)    
@@ -237,7 +238,7 @@ function hitEnemy(mc, enemy){
 
 function updateall(){
     
-    game.physics.arcade.collide(mc, platforms);
+    game.physics.arcade.collide(mc, platforms, collision);
     game.physics.arcade.collide(enemyP, platforms);
     game.physics.arcade.collide(enemyG, platforms);
     game.physics.arcade.collide(enemyB, platforms);
@@ -250,20 +251,25 @@ function updateall(){
     
 	addMoveEventListener();
 	
+    if (game.state.game.time.now>hitwalltime+300){
+        walltouchL=false;
+        walltouchR=false;
+    }
     
     passthrough();
     if (Stealth<=0){
         game.state.start('diedstate')
     }
 	
-		
+    
 	if(mc.body.touching.right == true){
 		walltouchR = true;
-
+        hitwalltime=game.state.game.time.now
+        
 	}
 	else if(mc.body.touching.left == true){
 		walltouchL = true;
-        
+        hitwalltime=game.state.game.time.now
 	}
     
 }
@@ -291,6 +297,7 @@ function colorChange(keyObject){
     
 	mc.loadTexture('stick'+guycolor);
     mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
+    
     console.log(guycolor);
     
 	}
@@ -310,17 +317,18 @@ function moving(keypress){
 		mc.scale.setTo(-1,1);
 		mc.animations.play('walk',12,true);
 		}
-	else if(keypress.keyCode == Phaser.Keyboard.RIGHT){
+	if(keypress.keyCode == Phaser.Keyboard.RIGHT){
 		mc.body.velocity.x = 250;
 		mc.scale.setTo(1,1);
 		mc.animations.play('walk',12,true);
 		}
-	else if(keypress.keyCode == Phaser.Keyboard.UP){
+	if(keypress.keyCode == Phaser.Keyboard.UP){
         
 		if(mc.body.touching.down){
 			mc.body.velocity.y = -350;	
             jump.play('',0,6,true);
 		}
+        
 		else if(walltouchR == true){
 			mc.body.velocity.y = -350;
 			mc.body.velocity.x = -200;
@@ -553,4 +561,7 @@ function enemyMove(enemyNum,bound1,bound2){
 function inRange(){
     Stealth-=.1
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
+}
+function collision(mc, platform){
+    console.log('colliding')
 }
