@@ -7,4 +7,5 @@ game.state.add('winstate',winstate);
 game.state.add('diedstate',diedstate);
 game.state.add('level1',level1);
 game.state.add('level2',level2);
-game.state.start('level2');
+game.state.add('level4',level4);
+game.state.start('level1');

@@ -520,7 +520,7 @@ function createEnemy(X,Y,color){
     thisenemy.anchor.x=.5;
     thisenemy.anchor.y=.5;
     thisenemy.body.collideWorldBounds=true;
-    thisenemy.body.gravity.y = 400;
+    thisenemy.body.gravity.y = 600;
     thisenemy.turn=1
     
     return thisenemy
