@@ -16,7 +16,12 @@ var level2 = {
 		//boxes
 		createCrate(750,(bottom + 260) - 100,'largecrate');
 		createCrate(1000,(bottom + 260) - 100,'largecrate');
-		createCrate(2017,(bottom + 260) - 287,'crate');
+		createCrate(1250,(bottom + 260) - 100,'largecrate');
+		createCrate(1500,(bottom + 260) - 100,'largecrate');
+		createCrate(1750,(bottom + 260) - 100,'largecrate');
+		createCrate(2050,(bottom + 260) - 287,'crate');
+		createBlueCollide(2200,750,'stepB',0.35,1);
+		createYellowCollide(2400,550,'stepY',0.35,1);
 
 		
 		//last platform + door
@@ -27,7 +32,7 @@ var level2 = {
         
         
         //add in the MC to the game
-		mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
+		mc = game.add.sprite(2000,(bottom + 410) - 955 * .6  - 150,'stickB');
         guycolor='B';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
@@ -42,7 +47,7 @@ var level2 = {
     update:function(){
         updateall();
         exitLevel2();
-        musicrestart();
+        //musicrestart();
 		//enemyMove(E1,300,1450);
 		//enemyMove(E2,2467,2967);
         

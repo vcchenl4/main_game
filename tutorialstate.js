@@ -76,7 +76,7 @@ var tutorialstate = {
 		
         createPlatform(0,bottom-20,'ground',1000,1)
         
-		mc = game.add.sprite(0,800,'stickP');
+		mc = game.add.sprite(0,800,'stickB');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
