@@ -70,11 +70,12 @@ var level1 = {
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
         game.camera.follow(mc)
-		mc.body.gravity.y = 550
+		mc.body.gravity.y = 600
 		
     },
 //***********************************************************************************************//
     update:function(){
+		console.log(walltouchR,walltouchL)
         updateall();
 		exitLevel1();
         musicrestart();

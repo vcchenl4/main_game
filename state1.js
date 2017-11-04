@@ -18,6 +18,7 @@ var state1 = {
         mc = game.add.sprite(200,800,'stickP');
         guycolor='P';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
+		mc.animations.add('slide',[9]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		
@@ -318,34 +319,22 @@ function addChangeEventListener(){
 
 //need to add in wall jumping in some way
 function moving(keypress){
-	
-	if (keypress.keyCode == Phaser.Keyboard.LEFT){
-		mc.body.velocity.x = -250;
-		mc.scale.setTo(-1,1);
-		mc.animations.play('walk',12,true);
-		}
-	if(keypress.keyCode == Phaser.Keyboard.RIGHT){
-		mc.body.velocity.x = 250;
-		mc.scale.setTo(1,1);
-		mc.animations.play('walk',12,true);
-		}
 	if(keypress.keyCode == Phaser.Keyboard.UP){
         
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -350;	
+			mc.body.velocity.y = -450;	
             jump.play('',0,6,true);
 		}
-        
-		else if(walltouchR == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = -200;
+		if(walltouchR == true){
+			mc.body.velocity.y = -450;
+			mc.body.velocity.x = -300;
 			mc.scale.setTo(-1,1);
 			walltouchR = false;
             jump.play('',0,6,true);
 		}
-		else if(walltouchL == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = 200;
+		if(walltouchL == true){
+			mc.body.velocity.y = -450;
+			mc.body.velocity.x = 300;
 			mc.scale.setTo(1,1);
 			walltouchL = false;
             jump.play('',0,6,true);
@@ -430,14 +419,71 @@ function enterwinstate(){
 }
 
 
+// this is to set up key objects which can then be used for onUp or onDown callbacks
 function keydef(){
 	Rkey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	Lkey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	Ukey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 	
+	//key onDown callbacks
+	Lkey.onDown.add(function(){
+		if (walltouchL == true){
+			mc.scale.setTo(1,1);
+			mc.animations.play('slide',1,true);
+		}
+		else{
+			mc.body.velocity.x = -250;
+			mc.scale.setTo(-1,1);
+			mc.animations.play('walk',12,true);
+		}
+	})	
+	Rkey.onDown.add(function(){
+		if (walltouchR == true){
+			mc.scale.setTo(-1,1);
+			mc.animations.play('slide',1,true);
+			console.log("i should be flipping")
+		}
+		else {
+			mc.body.velocity.x = 250;
+			mc.scale.setTo(1,1);
+			mc.animations.play('walk',12,true);
+		}
+	})
+	//key onHoldCallback
+	Lkey.onHoldCallback = function(){
+		if (walltouchL == true){
+			mc.scale.setTo(1,1);
+			mc.animations.play('slide',1,true);
+		}
+		else{
+			mc.body.velocity.x = -250;
+			mc.scale.setTo(-1,1);
+			mc.animations.play('walk',12,true);
+		}
+	}
+	Rkey.onHoldCallback = function(){
+		if (walltouchR == true){
+			mc.scale.setTo(-1,1);
+			mc.animations.play('slide',1,true);
+		}
+		else{
+			mc.body.velocity.x = 250;
+			mc.scale.setTo(1,1);
+			mc.animations.play('walk',12,true);
+		}
+	}
+	
+	//key onUp callbacks
 	//for wall jumps
-	Lkey.onUp.add(function(){walltouch = false;});
-	Rkey.onUp.add(function(){walltouch = false;});
+	Lkey.onUp.add(function(){
+		walltouchR = false;
+		walltouchL = false;
+		});
+	Rkey.onUp.add(function(){
+		walltouchR = false;
+		walltocuhL = false;
+		});
+		
 	//to properly stop walking animations
 	Lkey.onUp.add(function(){
 		mc.body.velocity.x = 0;
@@ -449,9 +495,8 @@ function keydef(){
 		mc.animations.stop();
 		mc.frame = 0;
 	});
-	
-	
 }
+
 // loop the bgm music
 function musicrestart(){
    if (music.context.currentTime>loop*18){
