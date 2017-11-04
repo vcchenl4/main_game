@@ -4,7 +4,7 @@ var level2 = {
     },
 //***********************************************************************************************//
     create: function(){
-        createrules(100,5/6);
+        createrules(100,5/6,"bgGray");
 		game.world.setBounds(0,0,width * 5, bottom + 300);
 		
 		//creates the enemies
