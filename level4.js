@@ -75,12 +75,12 @@ var level4 = {
         exitLevel2();
         musicrestart();
 		enemyMove(E1,850,950);
-        enemyMove(enemy4,1400,2200);
-        enemyMove(enemy3,1400,2200);
-        enemyMove(enemy5,1400,2200);
+        enemyMove(enemy4,1400,2500);
+        enemyMove(enemy3,1400,2500);
+        enemyMove(enemy5,1400,2500);
         enemyMove(enemy7,900,2000);
         enemyMove(enemy8,1200,1800);
-        enemyMove(enemy6,1400,2200);
+        enemyMove(enemy6,1400,2500);
 		enemyMove(E2,850,950);
         
     }

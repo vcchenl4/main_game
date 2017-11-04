@@ -76,10 +76,10 @@ var state1 = {
 //***********************************************************************************************//
 function preloadall(){
 	// load the player sprites
-    game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 130,182,8);
-    game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 130,182,8);
-	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 130,182,8);
-	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 130,182,8);
+    game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 133,170,10);
+    game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 133,170,10);
+	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 133,170,10);
+	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 133,170,10);
 	
 		//enviroment preloading
 		
@@ -240,7 +240,7 @@ function createrules(lvl_y,y_scale,bg_name){
 }
 
 function hitEnemy(mc, enemy){
-    Stealth-=.5
+    Stealth=0
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
 }
 
@@ -322,21 +322,21 @@ function moving(keypress){
 	if(keypress.keyCode == Phaser.Keyboard.UP){
         
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -450;	
+			mc.body.velocity.y = -400;	
             jump.play('',0,6,true);
 		}
 		if(walltouchR == true){
-			mc.body.velocity.y = -450;
-			mc.body.velocity.x = -300;
+			mc.body.velocity.y = -300;
+			mc.body.velocity.x = -400;
 			mc.scale.setTo(-1,1);
-			walltouchR = false;
+			
             jump.play('',0,6,true);
 		}
 		if(walltouchL == true){
-			mc.body.velocity.y = -450;
-			mc.body.velocity.x = 300;
+			mc.body.velocity.y = -300;
+			mc.body.velocity.x = 400;
 			mc.scale.setTo(1,1);
-			walltouchL = false;
+			
             jump.play('',0,6,true);
 		}
 	}
@@ -455,7 +455,7 @@ function keydef(){
 			mc.scale.setTo(1,1);
 			mc.animations.play('slide',1,true);
 		}
-		else{
+		if(mc.body.touching.down == true){
 			mc.body.velocity.x = -250;
 			mc.scale.setTo(-1,1);
 			mc.animations.play('walk',12,true);
@@ -466,7 +466,7 @@ function keydef(){
 			mc.scale.setTo(-1,1);
 			mc.animations.play('slide',1,true);
 		}
-		else{
+		if(mc.body.touching.down == true){
 			mc.body.velocity.x = 250;
 			mc.scale.setTo(1,1);
 			mc.animations.play('walk',12,true);
