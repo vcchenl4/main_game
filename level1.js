@@ -69,10 +69,8 @@ var level1 = {
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 400
         game.camera.follow(mc)
-		
-		mc.body.gravity = 550
+		mc.body.gravity.y = 550
 		
     },
 //***********************************************************************************************//
