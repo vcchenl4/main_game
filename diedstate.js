@@ -13,7 +13,7 @@ var diedstate={
     update: function () { 
         if (cursors.up.isDown){
             health=100
-            game.state.start('level1')
+            game.state.start('level4')
             music.restart()
         }
 

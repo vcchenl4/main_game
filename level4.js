@@ -44,9 +44,7 @@ var level4 = {
         
         
         
-        createBlueCollide(4600,675,'stepB',1,1)
-        createGreenCollide(5300,425,'stepG',1,1)
-        createYellowCollide(4250,800,'stepY',1,1)
+        createYellowCollide(2247,580,'stepY',1,1)
 
 		
 		//last platform + door
@@ -57,7 +55,8 @@ var level4 = {
         
         
         //add in the MC to the game
-		mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
+		//mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
+        mc = game.add.sprite(2800,900,'stickB');
         guycolor='B';
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;

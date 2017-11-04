@@ -621,7 +621,7 @@ function enemyMove(enemyNum,bound1,bound2){
     }
     else{
         enemyNum.radar.body.velocity.x=enemyNum.turn*150
-        
+        enemyNum.radar.body.y=enemyNum.body.y-70
         
         
         enemyNum.body.velocity.x=150*enemyNum.turn
