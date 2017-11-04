@@ -130,30 +130,8 @@ function preloadall(){
     game.load.spritesheet('enemyP', 'assets/Enemy_Neon_Pink_sprite_3.png', 160,180,8);
     game.load.spritesheet('enemyY', 'assets/Enemy_Neon_Yellow_sprite_3.png', 160,180,8);       
 }
-
-function createrules(lvl_y,y_scale,bg_name){
-	//this allows for when you want to change the height of the game and redraw the height of the background
-	if (lvl_y === undefined){
-		lvl_y = 0
-	}
-	if(y_scale === undefined){
-		y_scale = 2/3
-	}
-    cursors = game.input.keyboard.createCursorKeys();
-    //game.stage.backgroundColor = '561b1b';
-    var background=game.add.sprite(0,lvl_y,bg_name)
-    background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732,lvl_y,bg_name)
-    background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732*2,lvl_y,bg_name)
-    background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*3,lvl_y,bg_name)
-    background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*4,lvl_y,bg_name)
-    background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*5,lvl_y,bg_name)
-    //background.scale.setTo(2/3,y_scale)
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+function addmenu(){
+    
     Stealth=100;
     Stealthtext = game.add.text(16, 20, 'Stealth: 100%', { fontSize: '32px', fill: '#fff' });
     Stealthtext.fixedToCamera=true;
@@ -187,6 +165,31 @@ function createrules(lvl_y,y_scale,bg_name){
     
     
     
+}
+
+function createrules(lvl_y,y_scale,bg_name){
+	//this allows for when you want to change the height of the game and redraw the height of the background
+	if (lvl_y === undefined){
+		lvl_y = 0
+	}
+	if(y_scale === undefined){
+		y_scale = 2/3
+	}
+    cursors = game.input.keyboard.createCursorKeys();
+    //game.stage.backgroundColor = '561b1b';
+    var background=game.add.sprite(0,lvl_y,bg_name)
+    background.scale.setTo(2/3,y_scale)    
+    var background=game.add.sprite(1732,lvl_y,bg_name)
+    background.scale.setTo(2/3,y_scale)    
+    var background=game.add.sprite(1732*2,lvl_y,bg_name)
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*3,lvl_y,bg_name)
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*4,lvl_y,bg_name)
+    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*5,lvl_y,bg_name)
+    //background.scale.setTo(2/3,y_scale)
+    game.physics.startSystem(Phaser.Physics.ARCADE);
 	keydef()
 		
 	exit= game.add.group();

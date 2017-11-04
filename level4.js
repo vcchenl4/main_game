@@ -4,19 +4,37 @@ var level4 = {
     },
 //***********************************************************************************************//
     create: function(){
-        createrules(100,5/6);
+        createrules(100,5/6, 'bgGray');
 		game.world.setBounds(0,0,width * 5, bottom + 300);
 		
 		//creates the enemies
-		//E1 = createEnemy(644,1100,'enemyP');
-		//E2 = createEnemy(2467,240,'enemyB');
+
 		
 
 		
-		//boxes
-		createCrate(750,(bottom + 260) - 100,'largecrate');
-		createCrate(1000,(bottom + 260) - 100,'largecrate');
-		createCrate(2017,(bottom + 260) - 287,'crate');
+        createBlueCollide(300,240,'wallB',1,1)
+        
+        createYellowCollide(300,585,'wallY',1,1)
+        createYellowCollide(300,930,'wallY',1,1)
+        
+        createBlueCollide(700,240,'wallB',1,1)
+        
+        createGreenCollide(700,585,'wallG',1,1)
+        createPinkCollide(700,930,'wallP',1,1)
+        
+        
+        createPinkCollide(820,580,'stepP',1,1)
+        
+        
+        createPlatform(817,925,'testwall',5.8,.05)
+        createPlatform(1165,580,'testwall',.5,2)
+        
+		E1 = createEnemy(900,830,'enemyY');
+		E2 = createEnemy(900,1150,'enemyB');        
+        
+        createBlueCollide(4600,675,'stepB',1,1)
+        createGreenCollide(5300,425,'stepG',1,1)
+        createYellowCollide(4250,800,'stepY',1,1)
 
 		
 		//last platform + door
@@ -36,6 +54,7 @@ var level4 = {
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
         game.camera.follow(mc)
+        addmenu()
 		
     },
 //***********************************************************************************************//
@@ -43,8 +62,8 @@ var level4 = {
         updateall();
         exitLevel2();
         musicrestart();
-		//enemyMove(E1,300,1450);
-		//enemyMove(E2,2467,2967);
+		enemyMove(E1,850,950);
+		enemyMove(E2,850,950);
         
     }
 }
