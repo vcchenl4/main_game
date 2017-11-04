@@ -71,7 +71,7 @@ var level1 = {
         mc.body.collideWorldBounds=true;
         game.camera.follow(mc)
 		mc.body.gravity.y = 600
-		
+		addmenu();
     },
 //***********************************************************************************************//
     update:function(){

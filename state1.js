@@ -331,15 +331,15 @@ function moving(keypress){
             jump.play('',0,6,true);
 		}
 		if(walltouchR == true){
-			mc.body.velocity.y = -300;
-			mc.body.velocity.x = -400;
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = -300;
 			mc.scale.setTo(-1,1);
 			
             jump.play('',0,6,true);
 		}
 		if(walltouchL == true){
-			mc.body.velocity.y = -300;
-			mc.body.velocity.x = 400;
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = 300;
 			mc.scale.setTo(1,1);
 			
             jump.play('',0,6,true);
@@ -632,7 +632,7 @@ function enemyMove(enemyNum,bound1,bound2){
 }
 
 function inRange(){
-    Stealth-=.1
+    Stealth-=1
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
 }
 function collision(mc, platform){

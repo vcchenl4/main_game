@@ -38,14 +38,21 @@ var level4 = {
         enemy6.turn=-1
         createGreenCollide(1197,580,'stepG',1,1)
         createBlueCollide(1547,580,'stepB',1,1)
-        createPinkCollide(1897,580,'stepP',1,1)
+        createPinkCollide(1897,580,'wallP',1,1)
         enemy7 = createEnemy(1200,400,'enemyY')
         enemy8 = createEnemy(1500,400,'enemyP')
         
         
         
-        createYellowCollide(2247,580,'stepY',1,1)
-
+        createGreenCollide(2015,580,'wallG',1,1)
+        createYellowCollide(2135,580,'wallY',1,1)
+        createBlueCollide(2255,580,'wallB',1,1)
+        createPlatform(2570,580,'testwall',2,.05)
+        e4=createEnemy(2625,380,'enemyG')
+        e4.scale.setTo(-1,1)
+        e4.radar.scale.setTo(-1,1)
+        
+        
 		
 		//last platform + door
 		exit.create(4650,20,'exit');
@@ -81,6 +88,14 @@ var level4 = {
         enemyMove(enemy8,1200,1800);
         enemyMove(enemy6,1400,2500);
 		enemyMove(E2,850,950);
+        
+        
+        if (e4.radar.body.x>2585){
+            e4.radar.body.velocity.x=-20
+        }
+        else {
+            e4.radar.body.velocity.x=0
+        }
         
     }
 }
