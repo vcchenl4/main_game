@@ -18,7 +18,7 @@ var level4 = {
         createYellowCollide(300,930,'wallY',1,1)
         
         createBlueCollide(700,240,'wallB',1,1)
-        
+        createBlueCollide(700,-100,'wallB',1,1)
         createGreenCollide(700,585,'wallG',1,1)
         createPinkCollide(700,930,'wallP',1,1)
         
@@ -28,9 +28,21 @@ var level4 = {
         
         createPlatform(817,925,'testwall',5.8,.05)
         createPlatform(1165,580,'testwall',.5,2)
-        
+        createPlatform(0,580,'testwall',5,.05)
 		E1 = createEnemy(900,830,'enemyY');
 		E2 = createEnemy(900,1150,'enemyB');        
+        enemy3 = createEnemy(1400,1150,'enemyG')
+        enemy4 = createEnemy(1700,1150,'enemyP')
+        enemy5 = createEnemy(2000,1150,'enemyB')
+        enemy6 = createEnemy(2000,1150,'enemyY')
+        enemy6.turn=-1
+        createGreenCollide(1197,580,'stepG',1,1)
+        createBlueCollide(1547,580,'stepB',1,1)
+        createPinkCollide(1897,580,'stepP',1,1)
+        enemy7 = createEnemy(1200,400,'enemyY')
+        enemy8 = createEnemy(1500,400,'enemyP')
+        
+        
         
         createBlueCollide(4600,675,'stepB',1,1)
         createGreenCollide(5300,425,'stepG',1,1)
@@ -63,6 +75,12 @@ var level4 = {
         exitLevel2();
         musicrestart();
 		enemyMove(E1,850,950);
+        enemyMove(enemy4,1400,2200);
+        enemyMove(enemy3,1400,2200);
+        enemyMove(enemy5,1400,2200);
+        enemyMove(enemy7,900,2000);
+        enemyMove(enemy8,1200,1800);
+        enemyMove(enemy6,1400,2200);
 		enemyMove(E2,850,950);
         
     }
