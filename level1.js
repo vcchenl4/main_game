@@ -43,9 +43,9 @@ var level1 = {
 		
 		//guard platform + guard
 		createCrate(2460 + 215 * 5 * .75 ,(bottom + 260) - 635,'crate')
-		createPlatform(2275 + 215 * .75, 420,'testwall',10,.1)
-		createBlueCollide(3300,300,'stepB',1,1);
-		createYellowCollide(3900,300,'stepY',1,1);
+		//createPlatform(2275 + 215 * .75, 420,'testwall',10,.1)
+		createBlueCollide(3900,300,'stepB',1,1);
+		createYellowCollide(3300,425,'stepY',1,1);
 		
 		//last platform + door
 		createPlatform(3600,(bottom + 260) - 955 * .75,'rack',0.75,0.75);
@@ -76,7 +76,7 @@ var level1 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
-        exitTutorialstate();
+		exitLevel1();
         musicrestart();
 		enemyMove(E1,300,1450);
 		enemyMove(E2,2467,2967);

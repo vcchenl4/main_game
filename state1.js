@@ -75,10 +75,10 @@ var state1 = {
 //***********************************************************************************************//
 function preloadall(){
 	// load the player sprites
-    game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 160,180,8);
-    game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 160,180,8);
-	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 160,180,8);
-	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 160,180,8);
+    game.load.spritesheet('stickB', 'assets/Stickman Neon Blue sprite_3.png', 130,182,8);
+    game.load.spritesheet('stickG', 'assets/Stickman Neon Green sprite_3.png', 130,182,8);
+	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 130,182,8);
+	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 130,182,8);
 	
 		//enviroment preloading
 		
@@ -112,15 +112,18 @@ function preloadall(){
     
     //load the types of walls and crates
     game.load.image('crate', 'assets/crate.png');
-    game.load.image('largecrate','assets/largecrate.png')
-    game.load.image('rack', 'assets/block_rack.png')
-    game.load.image('walkrack','assets/walk_rack.png')
-    game.load.image('background','assets/background.png')
-	game.load.image('sml_rack','assets/small_walk_rack.png')
-    game.load.image('walkrack','assets/walk_rack.png')
-    game.load.image('background','assets/background.png')
-	game.load.image('invis','assets/invis.png')
+    game.load.image('largecrate','assets/largecrate.png');
+    game.load.image('rack', 'assets/block_rack.png');
+    game.load.image('walkrack','assets/walk_rack.png');
+    game.load.image('background','assets/background.png');
+	game.load.image('sml_rack','assets/small_walk_rack.png');
+    game.load.image('walkrack','assets/walk_rack.png');
+    game.load.image('background','assets/background.png');
+	game.load.image('invis','assets/invis.png');
+	game.load.image('bgGray','assets/background_gray.png');
     
+	
+	
     //enemy preloading
     game.load.spritesheet('enemyB', 'assets/Enemy_Neon_Blue_sprite_3.png', 160,180,8);
     game.load.spritesheet('enemyG', 'assets/Enemy_Neon_Green_sprite_3.png', 160,180,8);
@@ -137,19 +140,19 @@ function createrules(lvl_y,y_scale){
 		y_scale = 2/3
 	}
     cursors = game.input.keyboard.createCursorKeys();
-    game.stage.backgroundColor = '561b1b';
-    var background=game.add.sprite(0,lvl_y,'background')
+    //game.stage.backgroundColor = '561b1b';
+    var background=game.add.sprite(0,lvl_y,'bgGray')
     background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732,lvl_y,'background')
+    var background=game.add.sprite(1732,lvl_y,'bgGray')
     background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732*2,lvl_y,'background')
+    var background=game.add.sprite(1732*2,lvl_y,'bgGray')
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*3,lvl_y,'background')
+    var background=game.add.sprite(1732*3,lvl_y,'bgGray')
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*4,lvl_y,'background')
+    var background=game.add.sprite(1732*4,lvl_y,'bgGray')
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*5,lvl_y,'background')
-    background.scale.setTo(2/3,y_scale)
+    var background=game.add.sprite(1732*5,lvl_y,'bgGray')
+    //background.scale.setTo(2/3,y_scale)
     game.physics.startSystem(Phaser.Physics.ARCADE);
     Stealth=100;
     Stealthtext = game.add.text(16, 20, 'Stealth: 100%', { fontSize: '32px', fill: '#fff' });
@@ -398,14 +401,30 @@ function exitTutorialstate(){
 	game.physics.arcade.overlap(mc, exit,enterLevel1,null, this);
 	
 }
-function enterwinstate(){
-	game.state.start('winstate');
 	
-}
 function enterLevel1(){
 	game.state.start('level1');
 	
 }
+	
+function exitLevel1(){
+	game.physics.arcade.overlap(mc, exit,enterLevel2,null, this);
+
+}
+	
+function enterLevel2(){
+	game.state.start('level2');
+	
+}
+function exitLevel2(){
+	game.physics.arcade.overlap(mc, exit,winstate,null, this);
+
+}
+function enterwinstate(){
+	game.state.start('winstate');
+	
+}
+
 
 function keydef(){
 	Rkey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
