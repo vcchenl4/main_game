@@ -121,6 +121,7 @@ function preloadall(){
     game.load.image('background','assets/background.png');
 	game.load.image('invis','assets/invis.png');
 	game.load.image('bgGray','assets/background_gray.png');
+	game.load.image('mainMenu','assets/Main_menu.png');
     
 	
 	
