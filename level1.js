@@ -4,7 +4,7 @@ var level1 = {
     },
 //***********************************************************************************************//
     create: function(){
-        createrules(100,5/6);
+        createrules(100,5/6,'background');
 		game.world.setBounds(0,0,width * 5, bottom + 300);
 		
 		//creates the enemies
@@ -71,6 +71,8 @@ var level1 = {
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400
         game.camera.follow(mc)
+		
+		mc.body.gravity = 550
 		
     },
 //***********************************************************************************************//

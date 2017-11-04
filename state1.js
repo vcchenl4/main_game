@@ -55,7 +55,7 @@ var state1 = {
 				
         game.physics.arcade.enable(mc,platforms);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 400
+		mc.body.gravity.y = 550
         
         
         game.camera.follow(mc);
@@ -131,7 +131,7 @@ function preloadall(){
     game.load.spritesheet('enemyY', 'assets/Enemy_Neon_Yellow_sprite_3.png', 160,180,8);       
 }
 
-function createrules(lvl_y,y_scale){
+function createrules(lvl_y,y_scale,bg_name){
 	//this allows for when you want to change the height of the game and redraw the height of the background
 	if (lvl_y === undefined){
 		lvl_y = 0
@@ -141,17 +141,17 @@ function createrules(lvl_y,y_scale){
 	}
     cursors = game.input.keyboard.createCursorKeys();
     //game.stage.backgroundColor = '561b1b';
-    var background=game.add.sprite(0,lvl_y,'bgGray')
+    var background=game.add.sprite(0,lvl_y,bg_name)
     background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732,lvl_y,'bgGray')
+    var background=game.add.sprite(1732,lvl_y,bg_name)
     background.scale.setTo(2/3,y_scale)    
-    var background=game.add.sprite(1732*2,lvl_y,'bgGray')
+    var background=game.add.sprite(1732*2,lvl_y,bg_name)
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*3,lvl_y,'bgGray')
+    var background=game.add.sprite(1732*3,lvl_y,bg_name)
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*4,lvl_y,'bgGray')
+    var background=game.add.sprite(1732*4,lvl_y,bg_name)
     background.scale.setTo(2/3,y_scale)
-    var background=game.add.sprite(1732*5,lvl_y,'bgGray')
+    var background=game.add.sprite(1732*5,lvl_y,bg_name)
     //background.scale.setTo(2/3,y_scale)
     game.physics.startSystem(Phaser.Physics.ARCADE);
     Stealth=100;
