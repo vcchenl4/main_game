@@ -432,7 +432,7 @@ function keydef(){
 	
 	//key onDown callbacks
 	Lkey.onDown.add(function(){
-		if (walltouchL == true){
+		if (walltouchL == true && mc.body.touching.down == false){
 			mc.scale.setTo(1,1);
 			mc.animations.play('slide',1,true);
 		}
@@ -443,10 +443,9 @@ function keydef(){
 		}
 	})	
 	Rkey.onDown.add(function(){
-		if (walltouchR == true){
+		if (walltouchR == true && mc.body.touching.down == false){
 			mc.scale.setTo(-1,1);
 			mc.animations.play('slide',1,true);
-			console.log("i should be flipping")
 		}
 		else {
 			mc.body.velocity.x = 250;
@@ -456,7 +455,7 @@ function keydef(){
 	})
 	//key onHoldCallback
 	Lkey.onHoldCallback = function(){
-		if (walltouchL == true){
+		if (walltouchL == true && mc.body.touching.down == false){
 			mc.scale.setTo(1,1);
 			mc.animations.play('slide',1,true);
 		}
@@ -467,7 +466,7 @@ function keydef(){
 		}
 	}
 	Rkey.onHoldCallback = function(){
-		if (walltouchR == true){
+		if (walltouchR == true && mc.body.touching.down == false){
 			mc.scale.setTo(-1,1);
 			mc.animations.play('slide',1,true);
 		}
