@@ -269,6 +269,11 @@ function updateall(){
         game.state.start('diedstate')
     }
 	
+    if (game.state.game.time.now>hitwalltime+200){
+        walltouchL= false
+        walltouchR=false
+    }
+    
     
 	if(mc.body.touching.right == true){
 		walltouchR = true;
