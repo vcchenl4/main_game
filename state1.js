@@ -309,8 +309,10 @@ function colorChange(keyObject){
     }
     
 	mc.loadTexture('stick'+guycolor);
-    mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
-    
+	mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
+	mc.animations.add('slide',[9]);
+	mc.animations.add('jump',[8]);
+
     console.log(guycolor);
     
 	}
@@ -325,7 +327,6 @@ function addChangeEventListener(){
 //need to add in wall jumping in some way
 function moving(keypress){
 	if(keypress.keyCode == Phaser.Keyboard.UP){
-        
 		if(mc.body.touching.down){
 			mc.body.velocity.y = -400;	
             jump.play('',0,6,true);
@@ -345,6 +346,7 @@ function moving(keypress){
             jump.play('',0,6,true);
 		}
 	}
+	mc.animations.play('jump',12,true);
 }
 
 
