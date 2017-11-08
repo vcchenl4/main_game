@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
 //***********************************************************************************************//
 var width = 2000 
@@ -12,15 +12,16 @@ var state1 = {
     },
 //***********************************************************************************************//
     create: function(){
-		
+		checkpoint = "state1"
         createrules();
         
         mc = game.add.sprite(200,800,'stickP');
         guycolor='P';
-		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
-		mc.animations.add('slide',[9]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
+		mc.animations.add('jump',[8]);
+		mc.animations.add('slide',[9]);
+		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
 		
 		exit1 = exit.create(2000,850,'exit');
         exit1.body.immovable=true;
@@ -81,8 +82,7 @@ function preloadall(){
 	game.load.spritesheet('stickP', 'assets/Stickman Neon Pink sprite_3.png', 133,170,10);
 	game.load.spritesheet('stickY', 'assets/Stickman Neon Yellow sprite_3.png', 133,170,10);
 	
-		//enviroment preloading
-		
+	//enviroment preloading	
 	game.load.image('ground','assets/ground.png');
 	game.load.image('testwall','assets/testwall.png');
 	game.load.image('exit','assets/door.png');
@@ -239,11 +239,6 @@ function createrules(lvl_y,y_scale,bg_name){
     jump=game.add.audio('jumpSFX')   
 }
 
-function hitEnemy(mc, enemy){
-    Stealth=0
-    Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
-}
-
 function updateall(){
     
     game.physics.arcade.collide(mc, platforms, collision);
@@ -259,17 +254,15 @@ function updateall(){
     
 	addMoveEventListener();
 	
-	/*
     if (game.state.game.time.now>hitwalltime+300){
         walltouchL=false;
         walltouchR=false;
-    }*/
+    }
     
     passthrough();
     if (Stealth<=0){
         game.state.start('diedstate')
     }
-	
 	/*
     if (game.state.game.time.now>hitwalltime+200){
         walltouchL= false
@@ -279,16 +272,19 @@ function updateall(){
     
 	if(mc.body.touching.right == true && mc.body.touching.down == false){
 		walltouchR = true;
-        hitwalltime=game.state.game.time.now
+        //hitwalltime = game.state.game.time.now
         
 	}
 	else if(mc.body.touching.left == true && mc.body.touching.down == false){
 		walltouchL = true;
-        hitwalltime=game.state.game.time.now
+        //hitwalltime = game.state.game.time.now
 	}
-    
 }
 
+function hitEnemy(mc, enemy){
+    Stealth=0
+    Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
+}
 
 function addKeyCallback(key,func,args){
 	game.input.keyboard.addKey(key).onDown.add(func,null,null,args);
@@ -311,12 +307,11 @@ function colorChange(keyObject){
     }
     
 	mc.loadTexture('stick'+guycolor);
-	mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
-	mc.animations.add('slide',[9]);
 	mc.animations.add('jump',[8]);
+	mc.animations.add('slide',[9]);
+	mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
 
     console.log(guycolor);
-    
 	}
 
 function addChangeEventListener(){
@@ -327,29 +322,7 @@ function addChangeEventListener(){
 }
 
 //need to add in wall jumping in some way
-function moving(keypress){
-	if(keypress.keyCode == Phaser.Keyboard.UP){
-		if(mc.body.touching.down){
-			mc.body.velocity.y = -400;	
-            jump.play('',0,6,true);
-		}
-		if(walltouchR == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = -300;
-			mc.scale.setTo(-1,1);
-			
-            jump.play('',0,6,true);
-		}
-		if(walltouchL == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = 300;
-			mc.scale.setTo(1,1);
-			
-            jump.play('',0,6,true);
-		}
-	}
-	mc.animations.play('jump',12,true);
-}
+function moving(keypress){}
 
 
 
@@ -410,10 +383,14 @@ function enterLevel1(){
 }
 	
 function exitLevel1(){
-	game.physics.arcade.overlap(mc, exit,enterLevel2,null, this);
+	game.physics.arcade.overlap(mc, exit,enterLevel4,null, this);
 
 }
-	
+
+function enterLevel4(){
+	game.state.start('level4');
+}
+
 function enterLevel2(){
 	game.state.start('level2');
 	
@@ -457,6 +434,31 @@ function keydef(){
 			mc.animations.play('walk',12,true);
 		}
 	})
+	Ukey.onDown.add(function(){
+		mc.animations.frame = 0
+		if(mc.body.touching.down){
+			mc.body.velocity.y = -475;	
+            jump.play('',0,6,true);
+		}
+		if(walltouchR == true){
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = -300;
+			mc.scale.setTo(-1,1);
+			
+            jump.play('',0,6,true);
+		}
+		if(walltouchL == true){
+			mc.body.velocity.y = -350;
+			mc.body.velocity.x = 300;
+			mc.scale.setTo(1,1);
+			
+            jump.play('',0,6,true);
+		}
+		walltouchL = false
+		walltouchR = false
+		mc.animations.play('jump',12,true);
+	})
+
 	//key onHoldCallback
 	Lkey.onHoldCallback = function(){
 		if (walltouchL == true && mc.body.touching.down == false){
@@ -480,7 +482,6 @@ function keydef(){
 			mc.animations.play('walk',12,true);
 		}
 	}
-	
 	//key onUp callbacks
 	//for wall jumps
 	Lkey.onUp.add(function(){

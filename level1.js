@@ -4,6 +4,7 @@ var level1 = {
     },
 //***********************************************************************************************//
     create: function(){
+		checkpoint = "level1"
         createrules(100,5/6,'background');
 		game.world.setBounds(0,0,width * 5, bottom + 300);
 		
@@ -64,9 +65,13 @@ var level1 = {
         
 		mc = game.add.sprite(0,(bottom + 280) - 955 * .6  - 150,'stickB');
         guycolor='B';
-		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
-		mc.animations.add('slide',[9]);
+		
+		//make sure the animation adds are in this order or the character starts as the 1st frame of that animation
 		mc.animations.add('jump',[8]);
+		mc.animations.add('slide',[9]);
+		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
+
+
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
@@ -77,8 +82,9 @@ var level1 = {
     },
 //***********************************************************************************************//
     update:function(){
-		console.log(walltouchR,walltouchL)
         updateall();
+		if (walltouchL == true){
+			console.log(walltouchR,walltouchL)}
 		exitLevel1();
         musicrestart();
 		enemyMove(E1,300,1450);

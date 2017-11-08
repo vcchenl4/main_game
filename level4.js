@@ -4,6 +4,7 @@ var level4 = {
     },
 //***********************************************************************************************//
     create: function(){
+		checkpoint = 'level4'
         createrules(100,5/6, 'bgGray');
 		game.world.setBounds(0,0,width * 5, bottom + 300);
 		

@@ -10,10 +10,11 @@ var diedstate={
         cursors = game.input.keyboard.createCursorKeys();
         
     },
+	// set up a global variable checkpoint --> when you die you reset back to the level you were on
     update: function () { 
         if (cursors.up.isDown){
             health=100
-            game.state.start('level4')
+            game.state.start(checkpoint)
             music.restart()
         }
 

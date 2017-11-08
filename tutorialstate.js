@@ -4,6 +4,7 @@ var tutorialstate = {
     },
 //***********************************************************************************************//
     create: function(){
+		checkpoint = 'tutorialstate'
         createrules();
         
 		exit1 = exit.create(5651,50,'exit');
