@@ -259,28 +259,30 @@ function updateall(){
     
 	addMoveEventListener();
 	
+	/*
     if (game.state.game.time.now>hitwalltime+300){
         walltouchL=false;
         walltouchR=false;
-    }
+    }*/
     
     passthrough();
     if (Stealth<=0){
         game.state.start('diedstate')
     }
 	
+	/*
     if (game.state.game.time.now>hitwalltime+200){
         walltouchL= false
         walltouchR=false
-    }
+    }*/
     
     
-	if(mc.body.touching.right == true){
+	if(mc.body.touching.right == true && mc.body.touching.down == false){
 		walltouchR = true;
         hitwalltime=game.state.game.time.now
         
 	}
-	else if(mc.body.touching.left == true){
+	else if(mc.body.touching.left == true && mc.body.touching.down == false){
 		walltouchL = true;
         hitwalltime=game.state.game.time.now
 	}
