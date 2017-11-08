@@ -383,7 +383,7 @@ function enterLevel1(){
 }
 	
 function exitLevel1(){
-	game.physics.arcade.overlap(mc, exit,enterLevel4,null, this);
+	game.physics.arcade.overlap(mc, exit,enterLevel2,null, this);
 
 }
 
@@ -395,10 +395,15 @@ function enterLevel2(){
 	game.state.start('level2');
 	
 }
+function exitLevel2(){
+	game.physics.arcade.overlap(mc, exit,enterLevel4,null, this);
+
+}
 function exitLevel4(){
 	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
 
 }
+
 function enterwinstate(){
 	game.state.start('winstate');
 	
