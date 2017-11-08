@@ -13,7 +13,7 @@ var state1 = {
 //***********************************************************************************************//
     create: function(){
 		checkpoint = "state1"
-        createrules();
+        createrules(undefined,undefined,'background');
         
         mc = game.add.sprite(200,800,'stickP');
         guycolor='P';
@@ -61,7 +61,7 @@ var state1 = {
         
         
         game.camera.follow(mc);
-        
+        addmenu();
     
         
 		
@@ -395,8 +395,8 @@ function enterLevel2(){
 	game.state.start('level2');
 	
 }
-function exitLevel2(){
-	game.physics.arcade.overlap(mc, exit,winstate,null, this);
+function exitLevel4(){
+	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
 
 }
 function enterwinstate(){

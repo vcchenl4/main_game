@@ -14,5 +14,5 @@ var winstate={
         }
 
     },
-    update: function(){}
+ 
 }

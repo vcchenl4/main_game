@@ -56,7 +56,7 @@ var level4 = {
         
 		
 		//last platform + door
-		exit.create(4650,20,'exit');
+		exit.create(3300,980,'exit');
 			
 		//creates the ground
         ground=createPlatform(0,bottom + 280,'ground',1000,1);
@@ -79,7 +79,7 @@ var level4 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
-        exitLevel2();
+        exitLevel4();
         musicrestart();
 		enemyMove(E1,850,950);
         enemyMove(enemy4,1400,2500);
