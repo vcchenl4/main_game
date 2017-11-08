@@ -5,7 +5,7 @@ var tutorialstate = {
 //***********************************************************************************************//
     create: function(){
 		checkpoint = 'tutorialstate'
-        createrules();
+        createrules(undefined,undefined, 'bgGray');
         
 		exit1 = exit.create(5651,50,'exit');
         exit1.body.immovable=true;
@@ -88,6 +88,7 @@ var tutorialstate = {
         game.camera.follow(mc)
         
         music.play('',0,1,true);     
+        addmenu();
 		
     },
 //***********************************************************************************************//
