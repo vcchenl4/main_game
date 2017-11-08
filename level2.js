@@ -26,7 +26,7 @@ var level2 = {
 
 		
 		//last platform + door
-		exit.create(4650,20,'exit');
+		exit.create(4650,1000,'exit');
 			
 		//creates the ground
         ground=createPlatform(0,bottom + 280,'ground',1000,1);
