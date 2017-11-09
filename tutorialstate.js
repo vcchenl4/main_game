@@ -5,14 +5,11 @@ var tutorialstate = {
 //***********************************************************************************************//
     create: function(){
 		checkpoint = 'tutorialstate'
-        createrules(undefined,undefined, 'bgGray');
+        createrules(undefined,undefined, 'background');
         
 		exit1 = exit.create(5651,50,'exit');
         exit1.body.immovable=true;
-        //game.add.text(5713, 100, 'EXIT', { fontSize: '100px', fill: '#000' })
-        
-		//create crates for the tutorial level
-		//createCrate(xPos,yPos,crateType) 
+		
 		createCrate(300,920,'crate');
         
 		createCrate(800,920,'crate');
@@ -38,7 +35,7 @@ var tutorialstate = {
         createPlatform(2400,260,'rack',.98,.98)
 
         createPlatform(1900,488,'testwall',3.5,.0001)
-		//var wallx = createWall(200,-200,'testwall',3.5,.0001);
+
         createPlatform(1900,260,'testwall',3.5,.0001)
         
         createPlatform(2111,488,'testwall',.0001,3)
@@ -79,14 +76,15 @@ var tutorialstate = {
         
 		mc = game.add.sprite(0,800,'stickB');
         guycolor='P';
+		mc.animations.add('jump',[8]);
+		mc.animations.add('slide',[9]);
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 400
-        game.camera.follow(mc)
-        
+		mc.body.gravity.y = 400;
+        game.camera.follow(mc);
         music.play('',0,1,true);     
         addmenu();
 		
@@ -98,29 +96,5 @@ var tutorialstate = {
         musicrestart();
         
 		
-		//changed directional inputs to an event listners
-		//allows more simulatoneous inputs
-		/*
-		if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			mc.body.velocity.x=250;
-			mc.scale.setTo(1,1);
-			mc.animations.play('walk',5,true);
-            
-        }
-		else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-			mc.body.velocity.x=-250;
-			mc.scale.setTo(-1,1);
-			mc.animations.play('walk',5,true);
-		}
-        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && mc.body.touching.down){
-            mc.body.velocity.y -= 300;
-        }
-		
-		else{
-            mc.body.velocity.x=0;
-			mc.animations.stop();
-			mc.frame = 0;
-		}*/
-    }
+	}
 }
-

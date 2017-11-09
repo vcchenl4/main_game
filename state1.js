@@ -138,20 +138,20 @@ function addmenu(){
     Stealthtext = game.add.text(16, 20, 'Stealth: 100%', { fontSize: '32px', fill: '#fff' });
     Stealthtext.fixedToCamera=true;
     
-    headtext = game.add.text(340, 20, 'Control Keys:    1=', { fontSize: '32px', fill: '#fff' });
+    headtext = game.add.text(340, 20, 'Control Keys:    Z=', { fontSize: '32px', fill: '#fff' });
     headtext.fixedToCamera=true;
     headdude=game.add.sprite(570,8,'stickB');
     headdude.scale.setTo(.35,.35);
     headdude.fixedToCamera=true;
     
-    headtext = game.add.text(640, 20, '2=', { fontSize: '32px', fill: '#fff' });
+    headtext = game.add.text(640, 20, 'X=', { fontSize: '32px', fill: '#fff' });
     headtext.fixedToCamera=true;
     headdude=game.add.sprite(670,8,'stickG');
     headdude.scale.setTo(.35,.35);
     headdude.fixedToCamera=true;
     
     
-    headtext = game.add.text(740, 20, '3=', { fontSize: '32px', fill: '#fff' });
+    headtext = game.add.text(740, 20, 'C=', { fontSize: '32px', fill: '#fff' });
     headtext.fixedToCamera=true;
     headdude=game.add.sprite(770,8,'stickP');
     headdude.scale.setTo(.35,.35);
@@ -159,7 +159,7 @@ function addmenu(){
     
     
     
-    headtext = game.add.text(840, 20, '4=', { fontSize: '32px', fill: '#fff' });
+    headtext = game.add.text(840, 20, 'V=', { fontSize: '32px', fill: '#fff' });
     headtext.fixedToCamera=true;
     headdude=game.add.sprite(870,8,'stickY');
     headdude.scale.setTo(.35,.35);
@@ -236,7 +236,7 @@ function createrules(lvl_y,y_scale,bg_name){
     music = game.add.audio('bgm');
     
        
-    jump=game.add.audio('jumpSFX')   
+    jump=game.add.audio('jumpSFX');   
 }
 
 function updateall(){
@@ -293,16 +293,16 @@ function addKeyCallback(key,func,args){
 function colorChange(keyObject){
     guycolor=""
 	
-    if (keyObject.keyCode==Phaser.Keyboard.ONE) {
+    if (keyObject.keyCode==Phaser.Keyboard.Z) {
         guycolor='B';
     }
-    else if (keyObject.keyCode==Phaser.Keyboard.TWO) {
+    else if (keyObject.keyCode==Phaser.Keyboard.X) {
         guycolor='G';
     }
-    else if (keyObject.keyCode==Phaser.Keyboard.THREE) {
+    else if (keyObject.keyCode==Phaser.Keyboard.C) {
         guycolor='P';
     }
-    else if (keyObject.keyCode==Phaser.Keyboard.FOUR) {
+    else if (keyObject.keyCode==Phaser.Keyboard.V) {
         guycolor='Y';
     }
     
@@ -315,10 +315,10 @@ function colorChange(keyObject){
 	}
 
 function addChangeEventListener(){
-	addKeyCallback(Phaser.Keyboard.ONE,colorChange,'P');
-	addKeyCallback(Phaser.Keyboard.TWO,colorChange,'Y');
-	addKeyCallback(Phaser.Keyboard.THREE,colorChange,'B');
-	addKeyCallback(Phaser.Keyboard.FOUR,colorChange,'G');
+	addKeyCallback(Phaser.Keyboard.Z,colorChange,'P');
+	addKeyCallback(Phaser.Keyboard.X,colorChange,'Y');
+	addKeyCallback(Phaser.Keyboard.C,colorChange,'B');
+	addKeyCallback(Phaser.Keyboard.V,colorChange,'G');
 }
 
 //need to add in wall jumping in some way
@@ -386,19 +386,28 @@ function exitLevel1(){
 	game.physics.arcade.overlap(mc, exit,enterLevel2,null, this);
 
 }
-
-function enterLevel4(){
-	game.state.start('level4');
-}
-
 function enterLevel2(){
 	game.state.start('level2');
 	
 }
 function exitLevel2(){
+	game.physics.arcade.overlap(mc, exit,enterLevel3,null, this);
+
+}
+function enterLevel3(){
+	game.state.start('level3');
+	
+}
+function exitLevel3(){
 	game.physics.arcade.overlap(mc, exit,enterLevel4,null, this);
 
 }
+
+function enterLevel4(){
+	game.state.start('level4');
+}
+
+
 function exitLevel4(){
 	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
 

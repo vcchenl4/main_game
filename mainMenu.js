@@ -20,7 +20,7 @@ var mainMenu = {
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
         game.camera.follow(mc)
-		mc.body.gravity.y = 550
+		mc.body.gravity.y = 400
 		//create the ground
 		ground=createPlatform(0,990,'ground',1000,1);
 		wall=createPlatform(1410,0,'ground',10,100);
