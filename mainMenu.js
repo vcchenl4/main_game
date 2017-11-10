@@ -9,11 +9,11 @@ var mainMenu = {
 	create: function(){
 		createrules(1,1,"mainMenu");
 		game.world.setBounds(0,0,width,bottom);
-		
-		
 		//Create the player
 		mc = game.add.sprite(0,(bottom + 280) - 955 * .6  - 150,'stickB');
         guycolor='B';
+		mc.animations.add('jump',[8]);
+		mc.animations.add('slide',[9]);
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
@@ -23,10 +23,9 @@ var mainMenu = {
 		mc.body.gravity.y = 400
 		//create the ground
 		ground=createPlatform(0,990,'ground',1000,1);
-		wall=createPlatform(1410,0,'ground',10,100);
+		wall=createPlatform(1980,0,'ground',10,100);
+		wall2=createPlatform(-173,0,'ground',.5,100);
 
-		
-		
 	},
 	
 	update: function(){

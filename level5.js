@@ -21,21 +21,27 @@ var level5 = {
 			
 		//creates the ground
         ground=createPlatform(0,bottom + 280,'ground',1000,1);
+		//makes a ground
+		ground2=createPlatform(250,800,'ground',.315,16.5);
 		
         
         ///////////////////All Level 3 code/////////////////////////
 		
 		
-		createGreenCollide(25,400,'wallG',1,1);
-		createPinkCollide(25,750,'wallP',1,1);
+		createBlueCollide(25,800,'wallB',1,1);
+		createPinkCollide(250,935,'wallP',1,1);
+		createPinkCollide(750,935,'wallP',1,1);
+		createPinkCollide(1050,935,'wallP',1,1);
+		
+		
 		createGreenCollide(425,400,'wallG',1,1);
 		createPinkCollide(425,750,'wallP',1,1);
-		ground2=createPlatform(25,350,'ground',1.4,2.2);
+
 		
 		createBlueCollide(750,400,'wallB',1,1);
-		createPinkCollide(750,750,'wallP',1,1);
+
 		createBlueCollide(1050,400,'wallB',1,1);
-		createPinkCollide(1050,750,'wallP',1,1);
+
 		
 		
 		

@@ -15,7 +15,7 @@ var diedstate={
         if (cursors.up.isDown){
             health=100
             game.state.start(checkpoint)
-            music.restart()
+            //music.restart()
         }
 
     }
