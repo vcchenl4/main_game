@@ -310,7 +310,9 @@ function colorChange(keyObject){
 	mc.animations.add('jump',[8]);
 	mc.animations.add('slide',[9]);
 	mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
-
+    if (mc.body.velocity.x!=0){
+        mc.animations.play('walk',12,true);
+    }
     console.log(guycolor);
 	}
 
