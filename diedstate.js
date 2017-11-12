@@ -13,6 +13,11 @@ var diedstate={
 	// set up a global variable checkpoint --> when you die you reset back to the level you were on
     update: function () { 
         if (cursors.up.isDown){
+            loop=0
+            restart=true
+            restartTime=music.context.currentTime;
+            music.stop();
+            
             health=100
             game.state.start(checkpoint)
             //music.restart()

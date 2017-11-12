@@ -51,7 +51,7 @@ var level2 = {
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 400
+		mc.body.gravity.y = 600
         game.camera.follow(mc)
 		addmenu()
 		
@@ -59,6 +59,7 @@ var level2 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
+        musicrestart();
         exitLevel2();
         //musicrestart();
 		enemyMove(E1,550,1450);

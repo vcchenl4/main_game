@@ -83,7 +83,7 @@ var tutorialstate = {
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
-		mc.body.gravity.y = 400;
+		mc.body.gravity.y =600;
         game.camera.follow(mc);
         music.play('',0,1,true);     
         addmenu();

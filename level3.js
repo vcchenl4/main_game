@@ -61,6 +61,7 @@ var level3 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
+        musicrestart();
         exitLevel3();
         //musicrestart();
 		//enemyMove(E1,550,1450);
