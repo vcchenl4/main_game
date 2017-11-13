@@ -1,5 +1,5 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint;
-var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime;
+var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false, restart=false;
 //***********************************************************************************************//
 var width = 2000 
 var bottom = 1000
@@ -261,6 +261,7 @@ function updateall(){
     
     passthrough();
     if (Stealth<=0){
+        music.stop();
         game.state.start('diedstate')
     }
 	/*
@@ -279,6 +280,16 @@ function updateall(){
 		walltouchL = true;
         //hitwalltime = game.state.game.time.now
 	}
+    if (mc.animations.currentAnim.currentFrame.index==8){
+        if (mc.body.touching.down){
+            if (mc.body.velocity.x!=0){
+                mc.animations.play('walk',12,true);
+            }
+            else {
+                mc.frame=0
+            }
+        }
+    }
 }
 
 function hitEnemy(mc, enemy){
@@ -310,7 +321,9 @@ function colorChange(keyObject){
 	mc.animations.add('jump',[8]);
 	mc.animations.add('slide',[9]);
 	mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
-
+    if (mc.body.velocity.x!=0){
+        mc.animations.play('walk',12,true);
+    }
     console.log(guycolor);
 	}
 
@@ -451,19 +464,19 @@ function keydef(){
 	Ukey.onDown.add(function(){
 		mc.animations.frame = 0
 		if(mc.body.touching.down){
-			mc.body.velocity.y = -475;	
+			mc.body.velocity.y = -500;	
             jump.play('',0,6,true);
 		}
 		if(walltouchR == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = -300;
+			mc.body.velocity.y = -500;
+			mc.body.velocity.x = -150;
 			mc.scale.setTo(-1,1);
 			
             jump.play('',0,6,true);
 		}
 		if(walltouchL == true){
-			mc.body.velocity.y = -350;
-			mc.body.velocity.x = 300;
+			mc.body.velocity.y = -500;
+			mc.body.velocity.x = 150;
 			mc.scale.setTo(1,1);
 			
             jump.play('',0,6,true);
@@ -522,12 +535,23 @@ function keydef(){
 
 // loop the bgm music
 function musicrestart(){
-   if (music.context.currentTime>loop*18){
+    
+    if (restart){
+        if (music.context.currentTime>((loop*18)+restartTime)){
+            music.stop();
+            music.restart()
+            loop+=1
+        }
+    }
+    
+    if (music.context.currentTime>loop*18){
        music.stop()
        music.restart()      
        loop+=1
        
-   }
+    }
+    
+    
 };
 //creates the crates to use and place
 function createCrate(X,Y,crateType){
