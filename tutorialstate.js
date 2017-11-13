@@ -12,44 +12,29 @@ var tutorialstate = {
 		
 		createCrate(300,920,'crate');
         
+		createCrate(675,920,'crate');
 		createCrate(800,920,'crate');
-        
-        createCrate(1562,673,'crate');
-		
-		createCrate(800,795,'crate');
-        
-        createCrate(675,920,'crate');
-
         createCrate(926,920,'crate');
-
-        createCrate(1500,860,'largecrate');
-
-        createCrate(1752,860,'largecrate');
-
-        createCrate(1752,613,'largecrate');
-        createCrate(2850,860,'largecrate');
-        createCrate(2850,613,'largecrate');
-        createCrate(2850,370,'largecrate');
+		createCrate(800,795,'crate');  
 		
-		
-        createPlatform(2400,260,'rack',.98,.98)
-
-        createPlatform(1900,488,'testwall',3.5,.0001)
-
-        createPlatform(1900,260,'testwall',3.5,.0001)
+        createCrate(1400,860,'largecrate');
+		createCrate(1462,673,'crate');
+        createCrate(1652,860,'largecrate');
+		createCrate(1652,613,'largecrate');
         
-        createPlatform(2111,488,'testwall',.0001,3)
-        
-        createPlatform(2111,-190,'testwall',.0001,1)
-        
-        createPlatform(1900,-190,'testwall',.0001,1)
-        
-        var walkrack1=object.create(1900,4,'walkrack');
+		var walkrack1=object.create(1777,4,'walkrack');
         walkrack1.scale.setTo(.98,.98);
+		//top invis wall
+		createPlatform(1777,-190,'testwall',.0001,1)
+        createPlatform(1777,488,'testwall',3.5,.0001)
+		createPlatform(1777,260,'testwall',3.5,.0001)
+        createPlatform(1988,488,'testwall',.0001,3)   
+        createPlatform(1988,-190,'testwall',.0001,1)
         
+        createPlatform(2277,260,'rack',.98,.98)
+		createPlatform(2485,260,'rack',.98,.98)
+		createPlatform(2980,485,'rack',.60,.68)
 		
-        
-
 		createPlatform(2975,466,'testwall',18.8,.04)
         
         createPinkCollide(3050,119,'wallP',1,1)
@@ -65,13 +50,7 @@ var tutorialstate = {
         createCrate(4124,920,'crate')
 
         createPlatform(5650,360,'testwall',3,3)
-        
-        //for now we have complete ground coverage, we can change this later in the builds
-		//var test_wall = platforms.create(700,0,'testwall');
-        //test_wall.body.immovable = true;
-		//test_wall.scale.setTo(1,10);
-        // ground width = 368 + height = 21
-		
+        		
         createPlatform(0,bottom-20,'ground',1000,1)
         
 		mc = game.add.sprite(0,800,'stickB');
@@ -85,7 +64,7 @@ var tutorialstate = {
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y =600;
         game.camera.follow(mc);
-        music.play('',0,1,true);     
+        //music.play('',0,1,true);     
         addmenu();
 		
     },
@@ -93,7 +72,7 @@ var tutorialstate = {
     update:function(){
         updateall();
         exitTutorialstate();
-        musicrestart();
+        //musicrestart();
         
 		
 	}
