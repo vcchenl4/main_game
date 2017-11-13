@@ -11,4 +11,4 @@ game.state.add('level4',level4);
 game.state.add('level5',level5);
 game.state.add('winstate',winstate);
 game.state.add('diedstate',diedstate);
-game.state.start("level5");
+game.state.start("tutorialstate");
