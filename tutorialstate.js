@@ -35,7 +35,7 @@ var tutorialstate = {
 		createPlatform(2485,260,'rack',.98,.98)
 		createPlatform(2980,485,'rack',.60,.68)
 		
-		createPlatform(2975,466,'testwall',18.8,.04)
+		createPlatform(2975,466,'greywall',18.8,.04)
         
         createPinkCollide(3050,119,'wallP',1,1)
         createBlueCollide(3360,119,'wallB',1,1)
@@ -54,7 +54,7 @@ var tutorialstate = {
         createPlatform(0,bottom-20,'ground',1000,1)
         
 		mc = game.add.sprite(0,800,'stickB');
-        guycolor='P';
+        guycolor='B';
 		mc.animations.add('jump',[8]);
 		mc.animations.add('slide',[9]);
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);

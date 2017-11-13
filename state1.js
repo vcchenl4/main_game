@@ -16,7 +16,7 @@ var state1 = {
         createrules(undefined,undefined,'background');
         
         mc = game.add.sprite(200,800,'stickP');
-        guycolor='P';
+        guycolor='B';
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		mc.animations.add('jump',[8]);
@@ -85,6 +85,8 @@ function preloadall(){
 	//enviroment preloading	
 	game.load.image('ground','assets/ground.png');
 	game.load.image('testwall','assets/testwall.png');
+    game.load.image('whitewall','assets/whitewall.png');
+    game.load.image('greywall','assets/greywall.png');
 	game.load.image('exit','assets/door.png');
 	// load the color blocks	
 	game.load.image('blockB', 'assets/Neon Block_3_Blue.png');
