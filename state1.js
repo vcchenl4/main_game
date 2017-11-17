@@ -574,22 +574,34 @@ function createPinkCollide(X,Y,name,xScale,yScale){
     var thisobject=blockP.create(X,Y,name);
     thisobject.scale.setTo(xScale,yScale);
     thisobject.body.immovable=true;
+    thisobject.turn=1;
+    thisobject.body.collideWorldBounds=true;
+    return thisobject
 }
 
 function createBlueCollide(X,Y,name,xScale,yScale){
     var thisobject=blockB.create(X,Y,name);
     thisobject.scale.setTo(xScale,yScale);
     thisobject.body.immovable=true;
+    thisobject.turn=1
+    thisobject.body.collideWorldBounds=true;
+    return thisobject
 }
 function createYellowCollide(X,Y,name,xScale,yScale){
     var thisobject=blockY.create(X,Y,name);
     thisobject.scale.setTo(xScale,yScale);
     thisobject.body.immovable=true;
+    thisobject.turn=1
+    thisobject.body.collideWorldBounds=true;
+    return thisobject
 }
 function createGreenCollide(X,Y,name,xScale,yScale){
     var thisobject=blockG.create(X,Y,name);
     thisobject.scale.setTo(xScale,yScale);
     thisobject.body.immovable=true;
+    thisobject.turn=1
+    thisobject.body.collideWorldBounds=true;
+    return thisobject
 }
 
 function createEnemy(X,Y,color){
