@@ -675,6 +675,34 @@ function enemyMove(enemyNum,bound1,bound2){
     }
 }
 
+
+function colorBlockMove(blockname,bound1,bound2){
+    if (blockname.turn != 1 && blockname.turn!=-1){
+        blockname.turn=1;
+        blockname.body.collideWorldBounds=true;
+    }
+    if (blockname.body.x >=bound2){
+        blockname.turn=-1
+        
+        blockname.body.velocity.x= blockname.turn * 150;
+        
+    }
+    else if(enemyNum.body.x <=bound1){
+        
+        blockname.turn=1;
+        blockname.body.velocity.x = enemyNum.turn *150;
+        enemyNum.radar.body.velocity.x=enemyNum.turn*150
+        
+    }
+    else{
+        
+        blockname.body.velocity.x=150*enemyNum.turn
+        
+    }
+}
+
+
+
 function inRange(){
     Stealth-=1
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
