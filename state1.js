@@ -626,6 +626,7 @@ function createEnemy(X,Y,color){
         thisenemy.radar=radarY.create(X+40,Y-70,"radarY")
         thisenemy.color="Y"
     }
+    thisenemy.body.setSize(90,180,0,0)
     thisenemy.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2]);
     thisenemy.anchor.x=.5;
     thisenemy.anchor.y=.5;
@@ -660,8 +661,8 @@ function enemyMove(enemyNum,bound1,bound2){
         enemyNum.radar.scale.setTo(enemyNum.turn,1)
         enemyNum.body.velocity.x= enemyNum.turn * 150;
         enemyNum.radar.body.velocity.x=enemyNum.turn*150
-        enemyNum.radar.body.x=enemyNum.body.x+40
-        enemyNum.radar.body.y=enemyNum.body.y-70
+        enemyNum.radar.body.x=enemyNum.body.x+5
+        enemyNum.radar.body.y=enemyNum.body.y-75
         
     }
     else if(enemyNum.body.x <=bound1){
@@ -671,13 +672,18 @@ function enemyMove(enemyNum,bound1,bound2){
         enemyNum.radar.body.velocity.x=enemyNum.turn*150
         enemyNum.scale.setTo(1,1)
         enemyNum.radar.scale.setTo(enemyNum.turn,1)
-        enemyNum.radar.body.x=enemyNum.body.x+120
-        enemyNum.radar.body.y=enemyNum.body.y-70
+        enemyNum.radar.body.x=enemyNum.body.x+85
+        enemyNum.radar.body.y=enemyNum.body.y-75
         
     }
     else{
-        enemyNum.radar.body.velocity.x=enemyNum.turn*150
-        enemyNum.radar.body.y=enemyNum.body.y-70
+        if (enemyNum.turn==-1){
+            enemyNum.radar.body.x=enemyNum.body.x+5
+        }
+        else if (enemyNum.turn==1){
+            enemyNum.radar.body.x=enemyNum.body.x+85
+        }        
+        enemyNum.radar.body.y=enemyNum.body.y-75
         
         
         enemyNum.body.velocity.x=150*enemyNum.turn
