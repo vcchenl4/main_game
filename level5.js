@@ -73,6 +73,7 @@ var level5 = {
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
         mc.body.collideWorldBounds=true;
+		mc.body.setSize(100,170,0,0);
 		mc.body.gravity.y = 600
         game.camera.follow(mc)
         addmenu()

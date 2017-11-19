@@ -54,6 +54,7 @@ var level3 = {
 		mc.anchor.x=.5;
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
+		mc.body.setSize(100,170,0,0);
         mc.body.collideWorldBounds=true;
 		mc.body.gravity.y = 400		
         game.camera.follow(mc)

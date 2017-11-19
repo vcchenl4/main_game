@@ -157,6 +157,7 @@ var level4 = {
 		mc.animations.add('jump',[8]);
 		mc.animations.add('slide',[9]);
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,])
+		mc.body.setSize(100,170,0,0);
         mc.anchor.x=.5;
         mc.anchor.y= .5;
 		game.physics.arcade.enable(mc);
