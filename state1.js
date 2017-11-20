@@ -297,6 +297,7 @@ function updateall(){
 function hitEnemy(mc, enemy){
     Stealth=0
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
+    console.log(guycolor + enemy.color)
 }
 
 function addKeyCallback(key,func,args){
@@ -728,3 +729,4 @@ function inRange(){
 function collision(mc, platform){
     console.log('colliding')
 }
+function 

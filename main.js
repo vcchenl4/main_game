@@ -1,3 +1,6 @@
+if ((width>0)==false){
+    width=1000
+}
 var game = new Phaser.Game(width,bottom,Phaser.AUTO)
 game.state.add('state1',state1);
 game.state.add('state2',state2);
@@ -12,4 +15,4 @@ game.state.add('level5',level5);
 game.state.add('level6',level6);
 game.state.add('winstate',winstate);
 game.state.add('diedstate',diedstate);
-game.state.start("mainMenu");
+game.state.start("level6");

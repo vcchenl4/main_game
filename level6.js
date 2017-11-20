@@ -1,7 +1,8 @@
-
+var diamond, enemyB;
 var level6 = {
     preload: function(){
         preloadall();
+        game.load.image('diamond','assets/diamond.png');
     },
 //***********************************************************************************************//
     create: function(){
@@ -81,17 +82,31 @@ var level6 = {
         createGreenCollide(3080,580,'wallG',1,1)
 		createYellowCollide(3220,220,'wallY',1,1)
         createYellowCollide(3220,580,'wallY',1,1)
-        
+        createGreenCollide(3360,580,'wallG',1,1)
         enemyA=createEnemy(3220,50,'enemyG')
         
-		
+		///////////////////
+        
+        
+        
+        createPlatform(3500,0,'testwall',.5,.5)
+        
+        createPlatform(3500,580,'testwall',2,.05)
+        enemyB=createEnemy(3550,400,'enemyY')
+        
+        
+        
+        
+        ///////////////////
 		//last platform + door
-		exit.create(3300,980,'exit');
+		//exit.create(3300,980,'exit');
 			
 		//creates the ground
         ground=createPlatform(0,bottom + 280,'ground',1000,1);
         
-        
+        diamond =game.add.sprite(4500,400,'diamond')
+        diamond.scale.setTo(5,5)
+        game.physics.arcade.enable(diamond)
         //add in the MC to the game
 		//mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
         mc = game.add.sprite(3100,500,'stickB');
@@ -130,8 +145,9 @@ var level6 = {
         enemyMove(enemy6a,1600,3500);
         
         enemyMove(enemyA,3200,3240);
+        //enemyMove(enemyB,3501,3550);
         
-        
+        game.physics.arcade.overlap(mc, diamond,enterwinstate,null, this);
         if (e4.radar.body.x>2585){
             e4.radar.body.velocity.x=-20
         }
