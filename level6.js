@@ -1,4 +1,4 @@
-var diamond, enemytwo;
+var diamond, enemytwo,enemythree,enemyfour,enemyfive,enemysix,enemyseven,enemyeight, rotation=0,thistime;
 var level6 = {
     preload: function(){
         preloadall();
@@ -91,10 +91,14 @@ var level6 = {
         
         createPlatform(3500,0,'testwall',.5,.5)
         
-        createPlatform(3500,580,'testwall',2,.05)
+        
         enemytwo=createEnemy(3550,400,'enemyY')
         
+        createPlatform(3500,1000,'testwall',30,.05)
         
+        enemythree=createEnemy(4500,500,'enemyB')
+        
+        createYellowCollide(4300,1040,'wallY',1,.8)
         
         
         ///////////////////
@@ -104,13 +108,13 @@ var level6 = {
 		//creates the ground
         ground=createPlatform(0,bottom + 280,'ground',1000,1);
         
-        diamond =game.add.sprite(4500,400,'diamond')
-        diamond.scale.setTo(5,5)
+        diamond =game.add.sprite(4550,1100,'diamond')
+        diamond.scale.setTo(3,3)
         game.physics.arcade.enable(diamond)
         //add in the MC to the game
 		//mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
-        mc = game.add.sprite(3100,500,'stickB');
-        guycolor='B';
+        mc = game.add.sprite(4000,500,'stickY');
+        guycolor='Y';
 		mc.animations.add('jump',[8]);
 		mc.animations.add('slide',[9]);
 		mc.animations.add('walk',[0,1,2,3,4,5,6,7,6,5,4,3,2,]);
@@ -122,13 +126,45 @@ var level6 = {
         mc.body.setSize(100,170,0,0);
         game.camera.follow(mc)
         addmenu()
+        enemyeight=createEnemy(4900,2000,'enemyG')
 		
     },
 //***********************************************************************************************//
     update:function(){
+        if (mc.body.position.x>4000 && mc.body.position.y>1100){
+            if (rotation==0){
+                enemyeight=createEnemy(4700,1050,'enemyP')
+                
+                enemyMove(enemyeight,2000,4720);
+                rotation=1
+            }
+        }
+        if (enemyeight.body.position.x<4500){
+            enemyeight.kill()
+            enemyeight.radar.kill()
+            enemyeight.turn=-1
+            if(rotation==1){
+                thistime='enemyY'
+                rotation=2
+            }            
+            else if(rotation==2){
+                thistime='enemyP'
+                rotation=3
+            }
+            else if(rotation==3){
+                thistime='enemyG'
+                rotation=1
+            }
+            enemyeight=createEnemy(4700,1050,thistime)
+            enemyMove(enemyeight,2000,4701);
+        }
+        
         updateall();
         exitLevel4();
         musicrestart();
+        if (rotation!=0){
+            enemyMove(enemyeight,2000,4720);
+        }
 		enemyMove(E1,850,950);
         enemyMove(enemy4,1400,2500);
         enemyMove(enemy3,1400,2500);
@@ -146,6 +182,7 @@ var level6 = {
         
         enemyMove(enemyA,3200,3240);
         enemyMove(enemytwo,3501,3550);
+        enemyMove(enemythree,4000,5000);
         
         game.physics.arcade.overlap(mc, diamond,enterwinstate,null, this);
         if (e4.radar.body.x>2585){
