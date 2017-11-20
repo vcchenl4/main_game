@@ -1,4 +1,4 @@
-var diamond, enemyB;
+var diamond, enemytwo;
 var level6 = {
     preload: function(){
         preloadall();
@@ -92,7 +92,7 @@ var level6 = {
         createPlatform(3500,0,'testwall',.5,.5)
         
         createPlatform(3500,580,'testwall',2,.05)
-        enemyB=createEnemy(3550,400,'enemyY')
+        enemytwo=createEnemy(3550,400,'enemyY')
         
         
         
@@ -145,7 +145,7 @@ var level6 = {
         enemyMove(enemy6a,1600,3500);
         
         enemyMove(enemyA,3200,3240);
-        //enemyMove(enemyB,3501,3550);
+        enemyMove(enemytwo,3501,3550);
         
         game.physics.arcade.overlap(mc, diamond,enterwinstate,null, this);
         if (e4.radar.body.x>2585){

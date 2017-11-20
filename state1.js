@@ -1,8 +1,8 @@
 var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false, restart=false;
 //***********************************************************************************************//
-var width = 2000 
-var bottom = 1000
+var width = 2000; 
+var bottom = 1000;
 
 var state1 = {
     preload: function(){
@@ -295,9 +295,15 @@ function updateall(){
 }
 
 function hitEnemy(mc, enemy){
+    if (guycolor==enemy.color){
+        console.log('same')
+        return
+    }
     Stealth=0
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"
-    console.log(guycolor + enemy.color)
+    console.log('death')
+    console.log('guy color is '+guycolor)
+    console.log('enemy.color is ' +enemy.color)
 }
 
 function addKeyCallback(key,func,args){
@@ -729,4 +735,3 @@ function inRange(){
 function collision(mc, platform){
     console.log('colliding')
 }
-function 

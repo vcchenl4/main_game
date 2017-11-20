@@ -1,6 +1,3 @@
-if ((width>0)==false){
-    width=1000
-}
 var game = new Phaser.Game(width,bottom,Phaser.AUTO)
 game.state.add('state1',state1);
 game.state.add('state2',state2);
