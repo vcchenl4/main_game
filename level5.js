@@ -1,3 +1,4 @@
+var enemy3a, enemy4a, enemy5a, enemy6a, enemy7a,enemyA;
 var level5 = {
     preload: function(){
         preloadall();
