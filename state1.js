@@ -667,6 +667,20 @@ function createEnemy(X,Y,color){
     return thisenemy
  }
 
+function enemyStill(enemyNum){
+	if ((enemyNum.body.position.x-mc.body.position.x)>0){
+        if ((enemyNum.body.position.x-mc.body.position.x)<250){
+            if (enemyNum.color!=guycolor){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
+                    inRange();
+                }
+            }
+        }
+    }
+}
+
+
+
 function enemyMove(enemyNum,bound1,bound2){
     if ((enemyNum.body.position.x-mc.body.position.x)>0){
         if (enemyNum.turn==-1 && (enemyNum.body.position.x-mc.body.position.x)<250){
@@ -752,7 +766,7 @@ function colorBlockMove(blockname,bound1,bound2){
 
 
 function inRange(){
-    Stealth-=1
+    Stealth-=.25
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
 }
 function collision(mc, platform){

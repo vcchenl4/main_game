@@ -17,8 +17,6 @@ var level2 = {
 		EA= createEnemy(700,935,'enemyG');
 		EA.scale.x *= -1;
 		EA.radar.scale.x *=-1;
-		//E1A.radar.body.x-=20;
-		//E1A.radar.body.y-=100
 		EB= createEnemy(2100,935,'enemyY');
 		E2 = createEnemy(2500,1120,'enemyB');
 		E3 = createEnemy(3100,1120,'enemyG');
@@ -122,7 +120,7 @@ var level2 = {
 		enemyMove(E4,4300,4700);
 		enemyMove(E5,4200,4900);
 		
-        
+        enemyStill(EA)
 		//code for green guard
 		if (EA.radar.body.x>680){
             EA.radar.body.velocity.x=-550
@@ -137,6 +135,7 @@ var level2 = {
         else {
             EA.radar.body.velocity.y=0
         }
+
 		
 		//code for yellow guard
 		if (EB.radar.body.x>2130){
