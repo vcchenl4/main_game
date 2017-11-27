@@ -10,11 +10,6 @@ var level4 = {
 		endWall=createPlatform(4000,0,'ground',100,100);
 		endWall2=createPlatform(1,100,'ground',.05,100);
 		
-		//creates the enemies
-		//E1 = createEnemy(700,930,'enemyP');
-		//E2 = createEnemy(2467,500,'enemyB');
-		//E3 = createEnemy(2467,500,'enemyG');
-		
 
 		//last platform + door
 		exit.create(3850,950,'exit');

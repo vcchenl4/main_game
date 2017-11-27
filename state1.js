@@ -667,7 +667,7 @@ function createEnemy(X,Y,color){
     return thisenemy
  }
 
-function enemyStill(enemyNum){
+function enemyStillLeft(enemyNum){
 	if ((enemyNum.body.position.x-mc.body.position.x)>0){
         if ((enemyNum.body.position.x-mc.body.position.x)<250){
             if (enemyNum.color!=guycolor){
@@ -679,7 +679,17 @@ function enemyStill(enemyNum){
     }
 }
 
-
+function enemyStillRight(enemyNum){
+	if ((enemyNum.body.position.x-mc.body.position.x)<0){
+        if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<250){
+            if (enemyNum.color!=guycolor){
+                if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
+                    inRange();
+                }
+            }
+        }
+    }
+}
 
 function enemyMove(enemyNum,bound1,bound2){
     if ((enemyNum.body.position.x-mc.body.position.x)>0){

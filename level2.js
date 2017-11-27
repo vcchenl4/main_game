@@ -120,7 +120,7 @@ var level2 = {
 		enemyMove(E4,4300,4700);
 		enemyMove(E5,4200,4900);
 		
-        enemyStill(EA)
+        enemyStillLeft(EA);
 		//code for green guard
 		if (EA.radar.body.x>680){
             EA.radar.body.velocity.x=-550
@@ -138,6 +138,7 @@ var level2 = {
 
 		
 		//code for yellow guard
+		enemyStillRight(EB);
 		if (EB.radar.body.x>2130){
             EB.radar.body.velocity.x=-340
         }
@@ -151,6 +152,7 @@ var level2 = {
         else {
             EB.radar.body.velocity.y=0
         }
+		enemyStillLeft(EC);
 		//code for green guard 2
 				//code for yellow guard
 		if (EC.radar.body.x>4390){
@@ -169,6 +171,7 @@ var level2 = {
 		
 		//code for green guard 2
 		//code for yellow guard
+		enemyStillRight(ED);
 		if (ED.radar.body.x>5815){
             ED.radar.body.velocity.x=-200
         }
@@ -182,7 +185,9 @@ var level2 = {
         else {
             ED.radar.body.velocity.y=0
         }
+		
 		// code for blue guard
+		enemyStillRight(EE);
 		if (EE.radar.body.x>5715){
             EE.radar.body.velocity.x=-200
         }
@@ -196,7 +201,7 @@ var level2 = {
         else {
             EE.radar.body.velocity.y=0
         }
-		
+		enemyStillRight(EF);
 				// code for blue guard
 		if (EF.radar.body.x>5715){
             EF.radar.body.velocity.x=-200
