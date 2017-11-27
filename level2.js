@@ -42,6 +42,7 @@ var level2 = {
 		createBlueCollide(3400,795,'wallB',1,.70);
 		createPinkCollide(3400,500,'wallP',1,.70);
 		createYellowCollide(3400,255,'wallY',1,.70);
+		wall3=createPlatform(3360,bottom-500,'ground',.1,50);
 		
 		// second wall of colors
 		createGreenCollide(3800,255,'wallG',1,.70);
@@ -49,6 +50,7 @@ var level2 = {
 		createPinkCollide(3800,795,'wallP',1,.70);
 		createBlueCollide(3800,1040,'wallB',1,.70);
 		createYellowCollide(3400,743,'wallY',4.5,.15);
+		wall3=createPlatform(3918,bottom-1010,'ground',.1,50);
 		
 		
 		//ground 1
@@ -70,9 +72,6 @@ var level2 = {
 		platform2=createPlatform(4758,bottom -558.30,'ground',1.2,1.5);
 		E5 = createEnemy(4450,630,'enemyB');
 		
-
-
-		//main  level6 state1
 		
 		//last platform + door
 		wallexitx=createPlatform(5200,bottom - 550,'ground',.10,40);		
@@ -83,7 +82,7 @@ var level2 = {
 		EE = createEnemy(5700,750,'enemyG');
 		
 		//last platform and enemy before exit
-		//platform2=createPlatform(5550,bottom + 30,'ground',.60,1.5);
+		platform2=createPlatform(5550,bottom + 30,'ground',.60,1.5);
 		EF = createEnemy(5700,1100,'enemyB');
 		
 		createBlueCollide(5200,102,'wallB',1,1);

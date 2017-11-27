@@ -83,7 +83,7 @@ var level5 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
-        exitLevel4();
+        exitLevel5();
         musicrestart();
 		enemyMove(E1,850,950);
         enemyMove(enemy4,1400,2500);

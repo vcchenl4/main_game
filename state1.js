@@ -126,7 +126,12 @@ function preloadall(){
 	game.load.image('bgGray','assets/background_gray.png');
 	game.load.image('mainMenu','assets/Main_menu.png');
     
-	
+	//tutorial messages
+    game.load.image('tutor-up','assets/tutorial-up-message.png');
+    game.load.image('tutor-lr','assets/tutorial-left-and-right-message.png');
+    game.load.image('tutor-walljump','assets/tutorial-walljump.png');
+    game.load.image('tutor-color-change','assets/tutorial-color-change.png');
+    game.load.image('tutor-color-guard','assets/tutorial-color-guard.png');
 	
     //enemy preloading
     game.load.spritesheet('enemyB', 'assets/Enemy_Neon_Blue_sprite_3.png', 160,180,8);
@@ -431,15 +436,33 @@ function enterLevel4(){
 
 
 function exitLevel4(){
-	game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
+    game.physics.arcade.overlap(mc, exit,enterLevel5,null, this);
 
 }
+
+function enterLevel5(){
+    game.state.start('level5');
+}
+
+
+function exitLevel5(){
+    game.physics.arcade.overlap(mc, exit,enterLevel6,null, this);
+
+}
+
+function enterLevel6(){
+    game.state.start('level6');
+}
+
+function exitLevel6(){
+    game.physics.arcade.overlap(mc, exit,enterwinstate,null, this);
+
+}
+
 
 function enterwinstate(){
-	game.state.start('winstate');
-	
+    game.state.start('winstate');    
 }
-
 
 // this is to set up key objects which can then be used for onUp or onDown callbacks
 function keydef(){

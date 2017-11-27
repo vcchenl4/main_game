@@ -113,7 +113,7 @@ var level6 = {
         game.physics.arcade.enable(diamond)
         //add in the MC to the game
 		//mc = game.add.sprite(0,(bottom + 910) - 955 * .6  - 150,'stickB');
-        mc = game.add.sprite(4000,500,'stickY');
+        mc = game.add.sprite(100,1195,'stickY');
         guycolor='Y';
 		mc.animations.add('jump',[8]);
 		mc.animations.add('slide',[9]);
@@ -160,7 +160,7 @@ var level6 = {
         }
         
         updateall();
-        exitLevel4();
+        exitLevel6();
         musicrestart();
         if (rotation!=0){
             enemyMove(enemyeight,2000,4720);

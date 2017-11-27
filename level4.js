@@ -170,7 +170,7 @@ var level4 = {
 //***********************************************************************************************//
     update:function(){
         updateall();
-        //exitLevel3();
+        exitLevel4();
         //musicrestart();
 		//enemyMove(E1,550,1450);
 		//enemyMove(E2,2500,3000);
