@@ -111,6 +111,7 @@ var tutorialstate = {
     update:function(){
         updateall();
         exitTutorialstate();
+        enemyStillLeft(EA)
         //musicrestart();
         tutorial_walker.animations.play('walk',12,true);
         tutorial_jumper.animations.play('jump',4,true);
