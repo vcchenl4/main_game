@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime, overlay, overlayTime=0;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false, restart=false;
 //***********************************************************************************************//
 var width = 2000; 
@@ -113,6 +113,11 @@ function preloadall(){
     game.load.image('radarY','assets/Neon_Yellow_Radar.png')
     game.load.image('radarP','assets/Neon_Pink_Radar.png')
     
+    game.load.image('overlayG','assets/alert green.png')
+    game.load.image('overlayB','assets/alert blue.png')
+    game.load.image('overlayY','assets/alert yellow.png')
+    game.load.image('overlayP','assets/alert pink.png')
+    
     //load the types of walls and crates
     game.load.image('crate', 'assets/crate.png');
     game.load.image('largecrate','assets/largecrate.png');
@@ -184,6 +189,7 @@ function createrules(lvl_y,y_scale,bg_name){
 	if(y_scale === undefined){
 		y_scale = 2/3
 	}
+    overlay=game.add.sprite(-1000,-1000,'overlayB')
     cursors = game.input.keyboard.createCursorKeys();
     //game.stage.backgroundColor = '561b1b';
     var background=game.add.sprite(0,lvl_y,bg_name)
@@ -297,6 +303,7 @@ function updateall(){
             }
         }
     }
+    killoverlay();
 }
 
 function hitEnemy(mc, enemy){
@@ -672,7 +679,7 @@ function enemyStillLeft(enemyNum){
         if ((enemyNum.body.position.x-mc.body.position.x)<250){
             if (enemyNum.color!=guycolor){
                 if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
-                    inRange();
+                    inRange(enemyNum.color);
                 }
             }
         }
@@ -684,7 +691,7 @@ function enemyStillRight(enemyNum){
         if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<250){
             if (enemyNum.color!=guycolor){
                 if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
-                    inRange();
+                    inRange(enemyNum.color);
                 }
             }
         }
@@ -696,7 +703,7 @@ function enemyMove(enemyNum,bound1,bound2){
         if (enemyNum.turn==-1 && (enemyNum.body.position.x-mc.body.position.x)<250){
             if (enemyNum.color!=guycolor){
                 if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
-                    inRange();
+                    inRange(enemyNum.color);
                 }
             }
         }
@@ -705,7 +712,7 @@ function enemyMove(enemyNum,bound1,bound2){
         if (enemyNum.turn==1 && (mc.body.position.x-enemyNum.body.position.x)<250){
             if (enemyNum.color!=guycolor){
                 if (mc.body.position.y<(enemyNum.body.position.y+120) && mc.body.position.y>(enemyNum.body.position.y-240) ){
-                    inRange();
+                    inRange(enemyNum.color);
                 }
             }
         }
@@ -775,9 +782,23 @@ function colorBlockMove(blockname,bound1,bound2){
 
 
 
-function inRange(){
+function inRange(enemycolor){
     Stealth-=.25
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
+    console.log('inrange with '+enemycolor)
+    if (overlay.alive==false){
+        overlay=game.add.sprite(mc.body.position.x+50,mc.body.position.y+50,'overlay'+enemycolor)
+        overlay.anchor.x=.5;
+        overlay.anchor.y=.5;
+        overlay.scale.setTo(2,2)
+        overlayTime=game.state.game.time.now
+    }
+    
+}
+function killoverlay(){
+    if (game.state.game.time.now>+overlayTime){
+        overlay.kill();
+    }
 }
 function collision(mc, platform){
     console.log('colliding')

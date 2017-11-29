@@ -62,8 +62,8 @@
 		exit.create(3800,955,'exit');
 
         //add in the MC to the game
-		//mc = game.add.sprite(100,(bottom + 920) - 955 * .6  - 150,'stickB');
-		mc = game.add.sprite(2860,900,'stickB')
+		mc = game.add.sprite(100,(bottom + 920) - 955 * .6  - 150,'stickB');
+		//mc = game.add.sprite(2860,900,'stickB')
         guycolor='B';
 		mc.animations.add('jump',[8]);
 		mc.animations.add('slide',[9]);
