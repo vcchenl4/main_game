@@ -103,7 +103,7 @@ var tutorialstate = {
         mc.body.gravity.y =600;
         game.camera.follow(mc);
         mc.body.setSize(100,170,0,0);
-        //music.play('',0,1,true);     
+        music.play('',0,1,true);     
         addmenu();
         
     },
