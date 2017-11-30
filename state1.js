@@ -130,6 +130,11 @@ function preloadall(){
 	game.load.image('invis','assets/invis.png');
 	game.load.image('bgGray','assets/background_gray.png');
 	game.load.image('mainMenu','assets/Main_menu.png');
+	
+	//winscreen and game over screen
+	game.load.image('winScreen','assets/NewspaperWin.png');
+	game.load.image('gameOverScreen','assets/GameOver.png');
+
     
 	//tutorial messages
     game.load.image('tutor-up','assets/tutorial-up-message.png');
