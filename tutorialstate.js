@@ -90,6 +90,7 @@ var tutorialstate = {
         createPlatform(8750,340,'testwall',3,3)
                 
         createPlatform(0,bottom-20,'ground',1000,1)
+		createPlatform(8920,bottom-1000,'ground',1000,100);
         
         guycolor='B';
         mc.animations.add('jump',[8]);

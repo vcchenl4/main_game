@@ -22,14 +22,14 @@
 		e1 = createEnemy(427,244,'enemyY');
 		
 		//2) 1stcolored wall
-		createBlueCollide(910,890,'wallB',1,1.2);
-		createYellowCollide(910,600,'wallY',1,0.82);
-		createPinkCollide(910,410,'wallP',1,0.55);
-		createGreenCollide(910,125,'wallG',1,0.825);
+		createBlueCollide(900,935,'wallB',1,1.2);
+		createYellowCollide(900,500,'wallY',1,1.2);
+		createGreenCollide(900,100,'wallG',1,1.2);
+		//createGreenCollide(900,125,'wallG',1,0.825);
 		
 		//3)
-		createPlatform(1026,500,'rack',1,0.785);
-		createPlatform(1245,500,'rack',1,0.785);
+		createPlatform(1015,500,'rack',1,0.785);
+		createPlatform(1235,500,'rack',1,0.785);
 		
 		//4) top observation platform
 		createPlatform(1740,350,'greywall',23,.1);

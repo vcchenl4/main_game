@@ -795,7 +795,7 @@ function inRange(enemycolor){
         overlay=game.add.sprite(mc.body.position.x+50,mc.body.position.y+50,'overlay'+enemycolor)
         overlay.anchor.x=.5;
         overlay.anchor.y=.5;
-        overlay.scale.setTo(2,2)
+        overlay.scale.setTo(10,10)
         overlayTime=game.state.game.time.now
     }
     
@@ -806,5 +806,5 @@ function killoverlay(){
     }
 }
 function collision(mc, platform){
-    console.log('colliding')
+    //console.log('colliding')
 }
