@@ -181,10 +181,7 @@ function addmenu(){
     headdude=game.add.sprite(870,8,'stickY');
     headdude.scale.setTo(.35,.35);
     headdude.fixedToCamera=true;
-    
-    timertext = game.add.text(1700,20,'Time: 2:00',{fontSize: '32px', fill: '#fff'});
-	timertext.fixedToCamera = true;
-    
+      
 }
 
 function createrules(lvl_y,y_scale,bg_name){
@@ -249,15 +246,18 @@ function createrules(lvl_y,y_scale,bg_name){
     platforms.enableBody = true;
     addChangeEventListener();
     
-    
     game.world.setBounds(0,0, width*5 , bottom );
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
     music = game.add.audio('bgm');
-    
-	timmy = game.time.create(false);
-	timmy.add(120000,function(){game.state.start('diedstate')});
-	timmy.start();
-       
+	
+    if (game.state.current != "tutorialstate"){
+		timmy = game.time.create(false);
+		timmy.add(120000,function(){game.state.start('diedstate')});
+		timertext = game.add.text(1700,20,'Time: 2:00',{fontSize: '32px', fill: '#fff'});
+		timertext.fixedToCamera = true;
+		timmy.start();
+	}
+	
     jump=game.add.audio('jumpSFX');   
 }
 
@@ -286,13 +286,7 @@ function updateall(){
         music.stop();
         game.state.start('diedstate')
     }
-	updateTimer();
-	/*
-    if (game.state.game.time.now>hitwalltime+200){
-        walltouchL= false
-        walltouchR=false
-    }*/
-    
+	if (game.state.current != "tutorialstate"){updateTimer()};    
     
 	if(mc.body.touching.right == true && mc.body.touching.down == false){
 		walltouchR = true;
@@ -792,7 +786,22 @@ function colorBlockMove(blockname,bound1,bound2){
 
 function updateTimer(){
 	min_left = Math.floor(timmy.duration / Phaser.Timer.MINUTE);
+	//if else statements for edge cases
+	if (timmy.duration > 119000){
+		min_left = 2;
+	}
+	else if(timmy.duration > 59000 && timmy.duration < 60000){
+		min_left = 1;
+	}
+	
 	sec_left = Math.round(timmy.duration / Phaser.Timer.SECOND) - 60 * min_left;
+	if (sec_left == 60){
+		sec_left = 0;
+	}
+	
+	if (sec_left < 10){
+		sec_left = "0" + sec_left;
+	}
 	timertext.text = "timer: " + min_left + ":" + sec_left;
 }
 
