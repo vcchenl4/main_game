@@ -1,4 +1,4 @@
-var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime, overlay, overlayTime=0;
+var mc = {} , blockB, blockG, blockP, blockY, platforms, guycolor, block1,block2, block3, block4, exit, music, enemy1, enemy2, enemy3, turn=1, jump,enemyP,enemyG,enemyY,enemyB, Stealth, Stealthtext,radarG,radarB,radarY,radarP,ground,loop=1, hitwalltime,checkpoint,restartTime, overlay, overlayTime=0,timmy,timertext,hold;
 var Rkey,Lkey,Ukey,walltouchL = false,walltouchR = false, restart=false;
 //***********************************************************************************************//
 var width = 2000; 
@@ -182,7 +182,8 @@ function addmenu(){
     headdude.scale.setTo(.35,.35);
     headdude.fixedToCamera=true;
     
-    
+    timertext = game.add.text(1700,20,'Time: 2:00',{fontSize: '32px', fill: '#fff'});
+	timertext.fixedToCamera = true;
     
 }
 
@@ -253,6 +254,9 @@ function createrules(lvl_y,y_scale,bg_name){
     game.camera.deadzone=new Phaser.Rectangle(400,0,1000,bottom);
     music = game.add.audio('bgm');
     
+	timmy = game.time.create(false);
+	timmy.add(120000,function(){game.state.start('diedstate')});
+	timmy.start();
        
     jump=game.add.audio('jumpSFX');   
 }
@@ -282,6 +286,7 @@ function updateall(){
         music.stop();
         game.state.start('diedstate')
     }
+	updateTimer();
 	/*
     if (game.state.game.time.now>hitwalltime+200){
         walltouchL= false
@@ -785,7 +790,11 @@ function colorBlockMove(blockname,bound1,bound2){
     }
 }
 
-
+function updateTimer(){
+	min_left = Math.floor(timmy.duration / Phaser.Timer.MINUTE);
+	sec_left = Math.round(timmy.duration / Phaser.Timer.SECOND) - 60 * min_left;
+	timertext.text = "timer: " + min_left + ":" + sec_left;
+}
 
 function inRange(enemycolor){
     Stealth-=.25
