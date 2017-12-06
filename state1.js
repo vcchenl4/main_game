@@ -806,7 +806,7 @@ function updateTimer(){
 }
 
 function inRange(enemycolor){
-    Stealth-=.25
+    Stealth-=.35
     Stealthtext.text="Stealth: "+Math.round(Stealth)+"%"  
     console.log('inrange with '+enemycolor)
     if (overlay.alive==false){
