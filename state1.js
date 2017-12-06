@@ -113,10 +113,10 @@ function preloadall(){
     game.load.image('radarY','assets/Neon_Yellow_Radar.png')
     game.load.image('radarP','assets/Neon_Pink_Radar.png')
     
-    game.load.image('overlayG','assets/alert green.png')
-    game.load.image('overlayB','assets/alert blue.png')
-    game.load.image('overlayY','assets/alert yellow.png')
-    game.load.image('overlayP','assets/alert pink.png')
+    game.load.image('overlayG','assets/Alert Green.png')
+    game.load.image('overlayB','assets/Alert Blue.png')
+    game.load.image('overlayY','assets/Alert Yellow.png')
+    game.load.image('overlayP','assets/Alert Pink.png')
     
     //load the types of walls and crates
     game.load.image('crate', 'assets/crate.png');
