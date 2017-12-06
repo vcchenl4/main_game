@@ -1,8 +1,8 @@
 var mainMenu = {
 	preload: function(){
 		//loading main menu image
-		game.load.image("mainmenu","assets/mainmenu_copy.png")
-		game.load.spritesheet("play","assets/play button.png",550,225)
+		game.load.image("mainmenu","assets/mainmenu_copy.PNG")
+		game.load.spritesheet("play","assets/Play button.png",550,225)
 	},
 
 	create: function(){
